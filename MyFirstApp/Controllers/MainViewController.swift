@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -98,6 +99,10 @@ class MainViewController: UIViewController {
     
     // MARK: -  ID Ячейки tableView
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
+    
+    //MARK: REALM INIT Object
+    private let localRealm = try! Realm()
+    private let workouttArray: Results<WorkoutModel>! = nil
     
     // Прочитать про этот метод
     override func viewDidLayoutSubviews() {
