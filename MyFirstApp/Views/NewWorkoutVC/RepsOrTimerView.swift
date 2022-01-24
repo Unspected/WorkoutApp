@@ -41,12 +41,15 @@ class RepsOrTimerView: UIView {
         slider.maximumValue = 50
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
-        slider.addTarget(self, action: #selector(sliderValueReps), for: .valueChanged)
+        slider.addTarget(self, action: #selector(sliderRepsChanged), for: .valueChanged)
         return slider
     }()
     
-    @objc private func sliderValueReps() {
+    @objc private func sliderRepsChanged() {
         repsCountLabel.text = String(Int(repsSlider.value))
+        
+        setDeactivate(label: timerNameLabel, numberLabel: timerCountLabel, slider: timerSlider)
+        setActive(label: repsNameLabel, numberLabel: repsCountLabel, slider: repsSlider)
     }
     
     private let timerNameLabel: UILabel = UILabel(font18: "Timer")
@@ -60,17 +63,34 @@ class RepsOrTimerView: UIView {
         slider.maximumValue = 600
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
-        slider.addTarget(self, action: #selector(sliderValueTimer), for: .valueChanged)
+        slider.addTarget(self, action: #selector(sliderTimerChanged), for: .valueChanged)
         return slider
     }()
     
-    @objc private func sliderValueTimer() {
+    @objc private func sliderTimerChanged() {
         
         let (min, sec) = { (secs: Int) -> (Int, Int) in
                     return (secs / 60, secs % 60) }(Int(timerSlider.value))
         
         timerCountLabel.text = (sec != 0 ? "\(min) min \(sec) sec" : "\(min) min")
+        setDeactivate(label: repsNameLabel, numberLabel: repsCountLabel, slider: repsSlider)
+        setActive(label: timerNameLabel, numberLabel: timerCountLabel, slider: timerSlider)
         
+    }
+    
+    // MARK: - 1 method Active do it active slider 2 method Deactivated and reset value slider
+    private func setActive(label: UILabel, numberLabel: UILabel, slider: UISlider) {
+        label.alpha = 1
+        numberLabel.alpha = 1
+        slider.alpha = 1
+    }
+    // Сбрасываем значения у выбранного лэйбла и затемняем его
+    private func setDeactivate(label: UILabel, numberLabel: UILabel, slider: UISlider) {
+        label.alpha = 0.5
+        numberLabel.alpha = 0.5
+        numberLabel.text = "0"
+        slider.alpha = 0.5
+        slider.value = 0
     }
     
     
