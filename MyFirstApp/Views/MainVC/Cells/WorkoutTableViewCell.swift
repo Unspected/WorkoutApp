@@ -7,6 +7,13 @@
 
 import UIKit
 
+
+protocol StartWorkoutProtocol : AnyObject {
+    
+    func startButtonTapped(model : WorkoutModel)
+    
+}
+
 class WorkoutTableViewCell: UITableViewCell {
     
     // background Block
@@ -31,9 +38,9 @@ class WorkoutTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Image which to contains in Frame
-    private let imageCell : UIImageView = {
+    private var imageCell : UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "heavyItem")
+        //image.image = UIImage(named: "heavyItem")
         image.contentMode = .scaleToFill
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -53,11 +60,6 @@ class WorkoutTableViewCell: UITableViewCell {
         return button
     }()
     
-    // Нужно починить
-    @objc private func startButtonTapped() {
-        print("startButtonTapped")
-    }
-    
     private let repeatLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +76,8 @@ class WorkoutTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let exerciseNameLabel: UILabel = {
+    // Название упражнения
+    private let workoutNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Pull Ups"
         label.font = .robotoMedium22()
@@ -82,15 +85,55 @@ class WorkoutTableViewCell: UITableViewCell {
         return label
     }()
     
+    
+    var workoutModel = WorkoutModel()
+    // Нужно починить
+    @objc private func startButtonTapped() {
+        cellStartWorkoutDelegate?.startButtonTapped(model: workoutModel)
+    }
+    
+    // Заполняем модель данными из полей
+    func cellConfigure(model: WorkoutModel) {
+        
+        // Передаем сюда нашу модель
+        workoutModel = model
+        workoutNameLabel.text = model.workoutName
+        
+        let (min, sec) = { (secs: Int) -> (Int, Int) in
+                    return (secs / 60, secs % 60) }(Int(model.workoutTimer))
+        
+        repeatLabel.text = (model.workoutTimer == 0 ? "Reps: \(model.workoutReps)" : "Timer: \(min) min \(sec) sec")
+        setsLabel.text = "Sets: \(model.workoutSets)"
+        
+        guard let imageData = model.workoutImage else { return }
+        guard let image = UIImage(data: imageData) else { return }
+        imageCell.image = image
+        
+        // Если статус ставиться true, тогда изменяем кнопку на Complete и ставим статус isEnabled
+        if model.status {
+            startButton.setTitle("COMPLETE", for: .normal)
+            startButton.tintColor = .white
+            startButton.backgroundColor = .specialGreen
+            startButton.isEnabled = false
+        } else {
+            startButton.setTitle("START", for: .normal)
+            startButton.tintColor = .specialDarkGreen
+            startButton.backgroundColor = .specialYellow
+            startButton.isEnabled = true
+        }
+        
+    }
+    
     // Инициализация стак вью что бы поместить 2 лэйбла
     var stackVIewLabels = UIStackView()
+    
+    weak var cellStartWorkoutDelegate: StartWorkoutProtocol?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupView()
         setConstrains()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -106,13 +149,11 @@ class WorkoutTableViewCell: UITableViewCell {
         addSubview(imageCell)
         addSubview(startButton)
         stackVIewLabels = UIStackView(arrangedSubviews: [repeatLabel, setsLabel],
-                                  axis: .horizontal, spacing: 110)
+                                  axis: .horizontal, spacing: 13)
         addSubview(stackVIewLabels)
-        addSubview(exerciseNameLabel)
-        
+        addSubview(workoutNameLabel)
         
     }
-    
     
     private func setConstrains() {
         
@@ -157,9 +198,9 @@ class WorkoutTableViewCell: UITableViewCell {
         
         // Закрепления название упражнений
         NSLayoutConstraint.activate([
-            exerciseNameLabel.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10),
-            exerciseNameLabel.leadingAnchor.constraint(equalTo: frameForImageCell.trailingAnchor, constant: 10),
-            exerciseNameLabel.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 5)
+            workoutNameLabel.trailingAnchor.constraint(equalTo: backgroundCell.trailingAnchor, constant: -10),
+            workoutNameLabel.leadingAnchor.constraint(equalTo: frameForImageCell.trailingAnchor, constant: 10),
+            workoutNameLabel.topAnchor.constraint(equalTo: backgroundCell.topAnchor, constant: 5)
         ])
     }
     

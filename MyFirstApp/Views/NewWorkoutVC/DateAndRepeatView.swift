@@ -9,10 +9,9 @@ import UIKit
 
 class DateAndRepeatView: UIView {
     
-    
     private let dateLabel = UILabel(font18: "Date")
        
-    private let datePicker: UIDatePicker = {
+    let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.datePickerMode = .date
         picker.tintColor = .specialGreen
@@ -23,7 +22,7 @@ class DateAndRepeatView: UIView {
     
     private let repeatLabel = UILabel(font18: "Repeat every 7 days")
     
-    private let switchButton : UISwitch = {
+    let switchButton : UISwitch = {
         let switchBtn = UISwitch()
         switchBtn.isOn = true
         switchBtn.tintColor = .specialGreen

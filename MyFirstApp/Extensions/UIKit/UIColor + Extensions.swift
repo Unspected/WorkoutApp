@@ -9,8 +9,6 @@ import UIKit
 
 // Font Storage for this project use as roboMedium()
 
-import UIKit
-
 //#colorLiteral()
 
 // Storage unique color for project
@@ -26,4 +24,5 @@ extension UIColor {
     static let specialBlack = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
     static let specialTabBar = #colorLiteral(red: 0.8411106467, green: 0.8192877173, blue: 0.7538060546, alpha: 1)
     static let specialTabItem = #colorLiteral(red: 0.4939866662, green: 0.50020504, blue: 0.5000956655, alpha: 1)
+    static let specialDarkYellow = #colorLiteral(red: 0.9409481883, green: 0.7504605055, blue: 0, alpha: 1)
 }
