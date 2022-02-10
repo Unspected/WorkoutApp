@@ -10,14 +10,15 @@ import UIKit
 class RepsOrTimerView: UIView {
     
     private let setsNameLabel: UILabel = UILabel(font18: "Sets")
-    private let setsCountLabel: UILabel = UILabel(font18: "0")
+    let setsCountLabel: UILabel = UILabel(font24: "0")
     private var setsStackView: UIStackView = UIStackView()
     
-    private let setsSlider: UISlider = {
+    let setsSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumValue = 0
         slider.maximumValue = 50
+        // дефолтное положение 0
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
         slider.addTarget(self, action: #selector(sliderValueSets), for: .valueChanged)
@@ -28,16 +29,18 @@ class RepsOrTimerView: UIView {
         setsCountLabel.text = String(Int(setsSlider.value))
     }
     
-    private let chooseRepeatOrTimerLabel: UILabel = UILabel(extensionLabel: "Choose repeat or timer")
+    private let chooseRepeatOrTimerLabel: UILabel = UILabel(font14: "Choose repeat or timer")
     
     private let repsNameLabel: UILabel = UILabel(font18: "Reps")
-    private let repsCountLabel: UILabel = UILabel(font18: "0")
+    let repsCountLabel: UILabel = UILabel(font24: "0")
     private var repsStackView: UIStackView = UIStackView()
     
-    private let repsSlider: UISlider = {
+    
+    let repsSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumValue = 0
+        // Необходимо ставить дефолтное значчение для корректной работы
         slider.maximumValue = 50
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
@@ -53,10 +56,10 @@ class RepsOrTimerView: UIView {
     }
     
     private let timerNameLabel: UILabel = UILabel(font18: "Timer")
-    private let timerCountLabel: UILabel = UILabel(font18: "0 min")
+    let timerCountLabel: UILabel = UILabel(font24: "0 min")
     private var timerStackView: UIStackView = UIStackView()
     
-    private let timerSlider: UISlider = {
+    let timerSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumValue = 0
@@ -93,12 +96,12 @@ class RepsOrTimerView: UIView {
         slider.value = 0
     }
     
-    
     override init(frame:CGRect) {
         super.init(frame: frame)
         
         setupViews()
         setConstrains()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -130,7 +133,7 @@ class RepsOrTimerView: UIView {
         NSLayoutConstraint.activate([
             setsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             setsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
-            setsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 23)
+            setsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20)
         ])
         
         NSLayoutConstraint.activate([
@@ -145,7 +148,7 @@ class RepsOrTimerView: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            repsStackView.topAnchor.constraint(equalTo: chooseRepeatOrTimerLabel.bottomAnchor, constant: 10),
+            repsStackView.topAnchor.constraint(equalTo: chooseRepeatOrTimerLabel.bottomAnchor, constant: 20),
             repsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             repsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])

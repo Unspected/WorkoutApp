@@ -13,12 +13,24 @@
 		E91A8C04279D2B800095B818 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E91A8C03279D2B800095B818 /* Realm */; };
 		E91A8C06279D2B800095B818 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E91A8C05279D2B800095B818 /* RealmSwift */; };
 		E91A8C08279D2E1B0095B818 /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A8C07279D2E1B0095B818 /* WorkoutModel.swift */; };
+		E92F58EB27B35A4C0045E072 /* TimerWorkoutParametersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F58EA27B35A4C0045E072 /* TimerWorkoutParametersView.swift */; };
+		E9599AE427B1A9A3000C31FD /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9599AE327B1A9A3000C31FD /* UserModel.swift */; };
+		E9599AE627B1D23F000C31FD /* GallaryOrPhotoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9599AE527B1D23F000C31FD /* GallaryOrPhotoAlert.swift */; };
+		E963DD1D279FDC1400B0B889 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963DD1C279FDC1400B0B889 /* RealmManager.swift */; };
+		E968CA1C27A3CE4E00C2AE7F /* alertOkCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968CA1B27A3CE4E00C2AE7F /* alertOkCancel.swift */; };
+		E97183B127B0A9C800E1BB20 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97183B027B0A9C800E1BB20 /* ProfileCollectionViewCell.swift */; };
+		E97863EF27A8DA950062D86E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97863EE27A8DA950062D86E /* CustomAlert.swift */; };
+		E983ECFB27AE580600AA44CE /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983ECFA27AE580600AA44CE /* EditProfileViewController.swift */; };
+		E983ECFD27AF4FA900AA44CE /* UITextField + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E983ECFC27AF4FA900AA44CE /* UITextField + Extensions.swift */; };
 		E98B0ABC27953A8500D3F6A9 /* WeatherBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0ABB27953A8500D3F6A9 /* WeatherBlock.swift */; };
 		E98B0ABE27968CB500D3F6A9 /* WorkoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0ABD27968CB500D3F6A9 /* WorkoutTableViewCell.swift */; };
 		E98B0AC02797965C00D3F6A9 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0ABF2797965C00D3F6A9 /* NewWorkoutViewController.swift */; };
 		E98B0AC42798FE2200D3F6A9 /* UILabel + Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0AC32798FE2200D3F6A9 /* UILabel + Extenstions.swift */; };
 		E98B0AC72799372100D3F6A9 /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0AC62799372100D3F6A9 /* DateAndRepeatView.swift */; };
 		E98B0AC9279A6BDB00D3F6A9 /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B0AC8279A6BDB00D3F6A9 /* RepsOrTimerView.swift */; };
+		E98B5EBC27A208410062C3F0 /* RepsWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B5EBB27A208410062C3F0 /* RepsWorkoutViewController.swift */; };
+		E98B5EBF27A227B70062C3F0 /* DetailsWorkoutForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B5EBE27A227B70062C3F0 /* DetailsWorkoutForm.swift */; };
+		E98B5EC127A268B70062C3F0 /* TimerWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98B5EC027A268B70062C3F0 /* TimerWorkoutViewController.swift */; };
 		E992D362279240E3006791F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D361279240E3006791F1 /* AppDelegate.swift */; };
 		E992D364279240E3006791F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D363279240E3006791F1 /* SceneDelegate.swift */; };
 		E992D366279240E3006791F1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D365279240E3006791F1 /* MainViewController.swift */; };
@@ -32,6 +44,9 @@
 		E992D38927924A42006791F1 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E992D38827924A42006791F1 /* Roboto-Bold.ttf */; };
 		E992D38C2793A6D9006791F1 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D38B2793A6D9006791F1 /* CalendarView.swift */; };
 		E992D38E2793F1F1006791F1 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D38D2793F1F1006791F1 /* CalendarCollectionViewCell.swift */; };
+		E9A8124627A7B29E00C9AD71 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */; };
+		E9A8C775279FEE6000E43B64 /* SimpleAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */; };
+		E9F0C67D27ABB57700FBBA89 /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,12 +54,24 @@
 		E91A8BFE279B4EA80095B818 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		E91A8C00279B4EC10095B818 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E91A8C07279D2E1B0095B818 /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
+		E92F58EA27B35A4C0045E072 /* TimerWorkoutParametersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWorkoutParametersView.swift; sourceTree = "<group>"; };
+		E9599AE327B1A9A3000C31FD /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		E9599AE527B1D23F000C31FD /* GallaryOrPhotoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryOrPhotoAlert.swift; sourceTree = "<group>"; };
+		E963DD1C279FDC1400B0B889 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		E968CA1B27A3CE4E00C2AE7F /* alertOkCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertOkCancel.swift; sourceTree = "<group>"; };
+		E97183B027B0A9C800E1BB20 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		E97863EE27A8DA950062D86E /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		E983ECFA27AE580600AA44CE /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		E983ECFC27AF4FA900AA44CE /* UITextField + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extensions.swift"; sourceTree = "<group>"; };
 		E98B0ABB27953A8500D3F6A9 /* WeatherBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBlock.swift; sourceTree = "<group>"; };
 		E98B0ABD27968CB500D3F6A9 /* WorkoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableViewCell.swift; sourceTree = "<group>"; };
 		E98B0ABF2797965C00D3F6A9 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
 		E98B0AC32798FE2200D3F6A9 /* UILabel + Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extenstions.swift"; sourceTree = "<group>"; };
 		E98B0AC62799372100D3F6A9 /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
 		E98B0AC8279A6BDB00D3F6A9 /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
+		E98B5EBB27A208410062C3F0 /* RepsWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsWorkoutViewController.swift; sourceTree = "<group>"; };
+		E98B5EBE27A227B70062C3F0 /* DetailsWorkoutForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsWorkoutForm.swift; sourceTree = "<group>"; };
+		E98B5EC027A268B70062C3F0 /* TimerWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWorkoutViewController.swift; sourceTree = "<group>"; };
 		E992D35E279240E3006791F1 /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E992D361279240E3006791F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E992D363279240E3006791F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +87,9 @@
 		E992D38827924A42006791F1 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		E992D38B2793A6D9006791F1 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		E992D38D2793F1F1006791F1 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
+		E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlerts.swift; sourceTree = "<group>"; };
+		E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +105,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92F58E927B35A330045E072 /* TimerWorkoutVC */ = {
+			isa = PBXGroup;
+			children = (
+				E92F58EA27B35A4C0045E072 /* TimerWorkoutParametersView.swift */,
+			);
+			path = TimerWorkoutVC;
+			sourceTree = "<group>";
+		};
+		E963DD1B279FDB4000B0B889 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E963DD1C279FDC1400B0B889 /* RealmManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E97183AE27B0A98600E1BB20 /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				E97183AF27B0A99400E1BB20 /* Cells */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
+		E97183AF27B0A99400E1BB20 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E97183B027B0A9C800E1BB20 /* ProfileCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		E98B0AC527990EED00D3F6A9 /* NewWorkoutVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +144,14 @@
 				E98B0AC8279A6BDB00D3F6A9 /* RepsOrTimerView.swift */,
 			);
 			path = NewWorkoutVC;
+			sourceTree = "<group>";
+		};
+		E98B5EBD27A227820062C3F0 /* RepsWorkoutVC */ = {
+			isa = PBXGroup;
+			children = (
+				E98B5EBE27A227B70062C3F0 /* DetailsWorkoutForm.swift */,
+			);
+			path = RepsWorkoutVC;
 			sourceTree = "<group>";
 		};
 		E992D355279240E3006791F1 = {
@@ -108,6 +178,7 @@
 				E992D3772792415D006791F1 /* Controllers */,
 				E992D3762792414E006791F1 /* Application */,
 				E992D37827924175006791F1 /* Extensions */,
+				E963DD1B279FDB4000B0B889 /* Services */,
 				E992D37A27924190006791F1 /* Resources */,
 			);
 			path = MyFirstApp;
@@ -130,6 +201,9 @@
 				E91A8BFC279B4C820095B818 /* MainTabBarController.swift */,
 				E91A8BFE279B4EA80095B818 /* StatisticViewController.swift */,
 				E91A8C00279B4EC10095B818 /* ProfileViewController.swift */,
+				E98B5EBB27A208410062C3F0 /* RepsWorkoutViewController.swift */,
+				E98B5EC027A268B70062C3F0 /* TimerWorkoutViewController.swift */,
+				E983ECFA27AE580600AA44CE /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -138,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				E992D37C27924614006791F1 /* UIKit */,
+				E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */,
+				E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -146,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				E91A8C07279D2E1B0095B818 /* WorkoutModel.swift */,
+				E9599AE327B1A9A3000C31FD /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,6 +241,10 @@
 		E992D37B2792419C006791F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E92F58E927B35A330045E072 /* TimerWorkoutVC */,
+				E97183AE27B0A98600E1BB20 /* ProfileVC */,
+				E98B5EBD27A227820062C3F0 /* RepsWorkoutVC */,
+				E9A8C773279FEE4900E43B64 /* Alerts */,
 				E98B0AC527990EED00D3F6A9 /* NewWorkoutVC */,
 				E992D38A2793A6AD006791F1 /* MainVC */,
 			);
@@ -178,6 +259,7 @@
 				E992D38127924774006791F1 /* UIView + Extensions.swift */,
 				E992D38327924815006791F1 /* UIStackView + Extensions.swift */,
 				E98B0AC32798FE2200D3F6A9 /* UILabel + Extenstions.swift */,
+				E983ECFC27AF4FA900AA44CE /* UITextField + Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -208,6 +290,17 @@
 				E98B0ABD27968CB500D3F6A9 /* WorkoutTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		E9A8C773279FEE4900E43B64 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */,
+				E968CA1B27A3CE4E00C2AE7F /* alertOkCancel.swift */,
+				E97863EE27A8DA950062D86E /* CustomAlert.swift */,
+				E9599AE527B1D23F000C31FD /* GallaryOrPhotoAlert.swift */,
+			);
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,16 +390,31 @@
 				E98B0ABE27968CB500D3F6A9 /* WorkoutTableViewCell.swift in Sources */,
 				E91A8C01279B4EC10095B818 /* ProfileViewController.swift in Sources */,
 				E91A8C08279D2E1B0095B818 /* WorkoutModel.swift in Sources */,
+				E983ECFD27AF4FA900AA44CE /* UITextField + Extensions.swift in Sources */,
+				E983ECFB27AE580600AA44CE /* EditProfileViewController.swift in Sources */,
+				E9599AE427B1A9A3000C31FD /* UserModel.swift in Sources */,
 				E992D38427924815006791F1 /* UIStackView + Extensions.swift in Sources */,
 				E98B0AC72799372100D3F6A9 /* DateAndRepeatView.swift in Sources */,
+				E97863EF27A8DA950062D86E /* CustomAlert.swift in Sources */,
 				E992D380279246EA006791F1 /* UIFont + Extensions.swift in Sources */,
+				E9599AE627B1D23F000C31FD /* GallaryOrPhotoAlert.swift in Sources */,
+				E9A8124627A7B29E00C9AD71 /* Date + Extensions.swift in Sources */,
+				E968CA1C27A3CE4E00C2AE7F /* alertOkCancel.swift in Sources */,
 				E992D362279240E3006791F1 /* AppDelegate.swift in Sources */,
 				E91A8BFD279B4C820095B818 /* MainTabBarController.swift in Sources */,
+				E97183B127B0A9C800E1BB20 /* ProfileCollectionViewCell.swift in Sources */,
+				E9A8C775279FEE6000E43B64 /* SimpleAlerts.swift in Sources */,
 				E992D38E2793F1F1006791F1 /* CalendarCollectionViewCell.swift in Sources */,
 				E98B0AC9279A6BDB00D3F6A9 /* RepsOrTimerView.swift in Sources */,
+				E98B5EBF27A227B70062C3F0 /* DetailsWorkoutForm.swift in Sources */,
+				E9F0C67D27ABB57700FBBA89 /* Int + Extensions.swift in Sources */,
+				E98B5EC127A268B70062C3F0 /* TimerWorkoutViewController.swift in Sources */,
+				E98B5EBC27A208410062C3F0 /* RepsWorkoutViewController.swift in Sources */,
 				E98B0AC42798FE2200D3F6A9 /* UILabel + Extenstions.swift in Sources */,
 				E91A8BFF279B4EA80095B818 /* StatisticViewController.swift in Sources */,
+				E963DD1D279FDC1400B0B889 /* RealmManager.swift in Sources */,
 				E992D38227924774006791F1 /* UIView + Extensions.swift in Sources */,
+				E92F58EB27B35A4C0045E072 /* TimerWorkoutParametersView.swift in Sources */,
 				E992D364279240E3006791F1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +437,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -390,6 +499,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -448,6 +558,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZW3N55LCY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyFirstApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -476,6 +587,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZW3N55LCY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyFirstApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -49,31 +49,31 @@ class MainTabBarController: UITabBarController {
         items[1].title = "Statistic"
         items[2].title = "Profile"
         
-        items[0].image = UIImage(named: "tabBarMain")
-        items[1].image = UIImage(systemName: "waveform.path.ecg.rectangle")
-        items[2].image = UIImage(named: "tabBarProfile")
+        items[0].image = UIImage(systemName: "house.fill")
+        items[1].image = UIImage(systemName: "waveform.path.ecg.rectangle.fill")
+        items[2].image = UIImage(systemName: "person.fill")
         
     }
 }
 
 extension MainTabBarController: UITabBarControllerDelegate {
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
-        let removeSelectedBackground = {
-            tabBar.subviews.filter({ $0.layer.name == "TabBackgroundView" }).first?.removeFromSuperview()
-        }
-
-        let addSelectedBackground = { (bgColour: UIColor) in
-            let tabIndex = CGFloat(tabBar.items!.firstIndex(of: item)!)
-            let tabWidth = tabBar.bounds.width / CGFloat(tabBar.items!.count)
-            let bgView = UIView(frame: CGRect(x: tabWidth * tabIndex, y: 0, width: tabWidth, height: tabBar.bounds.height))
-            bgView.backgroundColor = bgColour
-            bgView.layer.name = "TabBackgroundView"
-            tabBar.insertSubview(bgView, at: 0)
-        }
-
-        removeSelectedBackground()
-        addSelectedBackground(.specialTabItem)
-    }
+//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+//
+//        let removeSelectedBackground = {
+//            tabBar.subviews.filter({ $0.layer.name == "TabBackgroundView" }).first?.removeFromSuperview()
+//        }
+//
+//        let addSelectedBackground = { (bgColour: UIColor) in
+//            let tabIndex = CGFloat(tabBar.items!.firstIndex(of: item)!)
+//            let tabWidth = tabBar.bounds.width / CGFloat(tabBar.items!.count)
+//            let bgView = UIView(frame: CGRect(x: tabWidth * tabIndex, y: 0, width: tabWidth, height: tabBar.bounds.height))
+//            bgView.backgroundColor = bgColour
+//            bgView.layer.name = "TabBackgroundView"
+//            tabBar.insertSubview(bgView, at: 0)
+//        }
+//
+//        removeSelectedBackground()
+//        addSelectedBackground(.specialTabItem)
+//    }
 }

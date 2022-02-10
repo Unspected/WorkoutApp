@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol SelectCollectionViewItemProtocol : AnyObject {
+    
+    func selectItem(date: Date)
+}
+
 class CalendarView: UIView {
     
     private let colletionView: UICollectionView = {
@@ -15,12 +20,13 @@ class CalendarView: UIView {
         collectionView.backgroundColor = .specialGreen
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
-        
     }()
     
-    private let weekDaysList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     private let idCell = "IdCell"
     // Функция отрисовки
+    
+    // Вызор протокола
+    weak var cellCollectionViewDelegate: SelectCollectionViewItemProtocol?
     
     // MARK: - Все инциализаторы ДОЛЖНЫ БЫТЬ ВЫЗЫВАНЫ ЗДЕСЬ !
     override init (frame: CGRect) {
@@ -83,14 +89,20 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // Количество айтемов
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weekDaysList.count
+        7
     }
     
     // Реализовать айтем
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Перееспользованная ячейка
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idCell, for: indexPath) as! CalendarCollectionViewCell
-        cell.setLabelDayOfWeek(name: weekDaysList[indexPath.row])
+        let dateTimeZone = Date().localDate()
+        let weekArray = dateTimeZone.getWeekArray()
+        cell.cellConfigure(numberOfDay: weekArray[1][indexPath.item], dayOfWeek: weekArray[0][indexPath.item])
+        
+        if indexPath.item == 6 {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+        }
 
         return cell
     }
@@ -98,7 +110,26 @@ extension CalendarView: UICollectionViewDataSource, UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       // Выполнение при выбранном элементе
+        
+
+        
+        let dateTimeZone = Date().localDate()
+        switch indexPath.item {
+        case 0:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 6))
+        case 1:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 5))
+        case 2:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 4))
+        case 3:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 3))
+        case 4:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 2))
+        case 5:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 1))
+        default:
+            cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offsetDays(days: 0))
+        }
     }
     
     

@@ -10,24 +10,27 @@ import RealmSwift
 
 class MainViewController: UIViewController {
     
-    private let userPhoto: UIImageView = {
+    private let userPhotoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8044065833, green: 0.8044064641, blue: 0.8044064641, alpha: 1)
         imageView.layer.borderWidth = 5
         // Обязательно указывать такой формат  cGColor
         imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         // imageView.layer.cornerRadius = 50
         return imageView
     }()
     
     // Создание Label где будет имя
-    private let userNameLabel : UILabel = {
-        let label = UILabel()
-        label.text = "Pavel Andreev"
-        label.textAlignment = .center
+    private let userNameLabel: UILabel = {
+       let label = UILabel()
+        label.text = "Your Name"
         label.textColor = .specialGray
         label.font = .robotoMedium24()
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,8 +56,8 @@ class MainViewController: UIViewController {
     @objc private func addWorkoutButtonTapped() {
         
        let newController = NewWorkoutViewController()
+       newController.modalPresentationStyle = .fullScreen
        present(newController, animated: true)
-
     }
     
     private let workoutTodayLabel : UILabel = {
@@ -76,6 +79,7 @@ class MainViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delaysContentTouches = false
+        tableView.backgroundColor = .specialBackground
         // Ячейка отключена
         //tableView.isHidden = true
         return tableView
@@ -91,7 +95,6 @@ class MainViewController: UIViewController {
         return image
     }()
     
-
     // новый блок погоды
     private let weatherBlock = WeatherBlock()
     // Импорт класса в котором вся логика
@@ -102,25 +105,54 @@ class MainViewController: UIViewController {
     
     //MARK: REALM INIT Object
     private let localRealm = try! Realm()
-    private let workouttArray: Results<WorkoutModel>! = nil
+    // Инициализация массивка по которому мы собираем
+    private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
+    
+    // check TableView Cells
+    private func screenWithoutCells() {
+        if workoutArray.count == 0 {
+            tableView.isHidden = true
+            nonTableViewImage.isHidden = false
+        } else {
+            tableView.isHidden = false
+            nonTableViewImage.isHidden = true
+        }
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
+    }
     
     // Прочитать про этот метод
     override func viewDidLayoutSubviews() {
-        userPhoto.layer.cornerRadius = userPhoto.frame.width / 2
+        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        setupUserParameters()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userArray = localRealm.objects(UserModel.self)
+        
         setUpViews()
         setConstrains()
         setDelegate()
+        setupUserParameters()
+        getWorkoutDate(date: Date().localDate())
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
-        
+    
     }
     
     private func setDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
+        calendarView.cellCollectionViewDelegate = self
     }
     
     // MARK: - setupViews ВСЕ ЭЛЕМЕНТЫ НУЖНО ДОБАВЛЯТЬ СЮДА!!!
@@ -128,7 +160,7 @@ class MainViewController: UIViewController {
     private func setUpViews() {
         view.backgroundColor = .specialBackground
         view.addSubview(calendarView)
-        view.addSubview(userPhoto)
+        view.addSubview(userPhotoImageView)
         view.addSubview(userNameLabel)
         view.addSubview(addWorkoutButton)
         view.addSubview(weatherBlock)
@@ -136,10 +168,36 @@ class MainViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(nonTableViewImage)
     }
+    
+    private func getWorkoutDate(date: Date) {
+        
+        let dateTimeZone = date
+        let weekday = dateTimeZone.getWeekdayNumber()
+        let dateStart = dateTimeZone.startEndDate().0
+        let dateEnd = dateTimeZone.startEndDate().1
+        
+        let predicateRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekday) AND workoutRepeat = true")
+        let predicateUnRepeat = NSPredicate(format: "workoutRepeat = false AND workoutDate BETWEEN %@", [dateStart,dateEnd])
+        let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat,predicateUnRepeat])
+        
+        // Вызываем список
+        workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
+        screenWithoutCells()
+        tableView.reloadData()
+    }
+    
+    private func setupUserParameters() {
+        
+        if userArray.count != 0 {
+            userNameLabel.text = "\(userArray[0].userFirstName) \(userArray[0].userLastName)"
+            // Проверяем есть ли в БД Фото и
+            guard let data = userArray[0].userImage else { return }
+            //потом дальше проверяет фото и далее присваиваем фото
+            guard let image = UIImage(data: data) else { return }
+            userPhotoImageView.image = image
+        }
+    }
 }
-
-
-
 
 
 // MARK: - TableViewDataSource
@@ -147,21 +205,21 @@ extension MainViewController : UITableViewDataSource {
     
     // Количество Ячеек
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        workoutArray.count
     }
     
     // Инициализация ячейки
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
-        
+        let model = workoutArray[indexPath.row]
+        cell.cellConfigure(model: model)
         // Кнопка в ячейки откликаеться на действие и можно привязать action
+        cell.cellStartWorkoutDelegate = self
         cell.contentView.isUserInteractionEnabled = false
         return cell
     }
     
-    
 }
-
 
 // MARK: - UITableViewDelegate ВЫСОТА ЯЧЕЙКИ
 extension MainViewController: UITableViewDelegate {
@@ -170,6 +228,48 @@ extension MainViewController: UITableViewDelegate {
         100
     }
     
+    // Свайп для каких либо действий в ячейке
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.workoutArray[indexPath.row]
+            RealmManager.shared.deleteWorkoutModel(model: deleteModel)
+            tableView.reloadData()
+        }
+        action.backgroundColor = .specialBackground
+        action.image = UIImage(named: "delete")
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
+}
+
+// MARK: - StartWorkOutProtocol
+extension MainViewController: StartWorkoutProtocol {
+    
+    func startButtonTapped(model: WorkoutModel) {
+        
+        if model.workoutTimer == 0 {
+            let startWorkoutVC = RepsWorkoutViewController()
+            startWorkoutVC.modalPresentationStyle = .fullScreen
+            startWorkoutVC.workoutModel = model
+            present(startWorkoutVC, animated: true, completion: nil)
+        }
+        else  {
+//            let startWorkoutTimerVC = TimerWorkoutViewController()
+            let startWorkoutTimerVC = TimerWorkoutViewController()
+            startWorkoutTimerVC.modalPresentationStyle = .fullScreen
+            startWorkoutTimerVC.workoutModel = model
+            present(startWorkoutTimerVC, animated: true, completion: nil)
+        }
+    }
+}
+
+extension MainViewController : SelectCollectionViewItemProtocol {
+    
+    func selectItem(date: Date) {
+        getWorkoutDate(date: date)
+    }
 }
 
 
@@ -181,10 +281,10 @@ extension MainViewController {
         
         // Список констрейнтов для UserPhoto
         NSLayoutConstraint.activate([
-            userPhoto.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            userPhoto.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            userPhoto.widthAnchor.constraint(equalToConstant: 100),
-            userPhoto.heightAnchor.constraint(equalToConstant: 100)
+            userPhotoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            userPhotoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            userPhotoImageView.widthAnchor.constraint(equalToConstant: 100),
+            userPhotoImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
         // Позиционирование календаря
@@ -199,9 +299,10 @@ extension MainViewController {
         // Позиционирование Label Name
         NSLayoutConstraint.activate([
             // Слева констрейнт мы отталиваемся от правого края userPhoto
-            userNameLabel.leadingAnchor.constraint(equalTo: userPhoto.trailingAnchor, constant: 5),
+            userNameLabel.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 5),
             // Снизу констрейнт мы отталкиваемся от верха календаря
-            userNameLabel.bottomAnchor.constraint(equalTo: calendarView.topAnchor, constant: -10)
+            userNameLabel.bottomAnchor.constraint(equalTo: calendarView.topAnchor, constant: -10),
+            userNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
         NSLayoutConstraint.activate([

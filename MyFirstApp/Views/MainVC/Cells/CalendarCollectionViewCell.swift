@@ -9,7 +9,7 @@ import UIKit
 
 class CalendarCollectionViewCell: UICollectionViewCell {
     
-    private var dayOfWeek : UILabel = {
+    private var dayOfWeekLabel : UILabel = {
         let label = UILabel()
         label.text = "Mon"
         label.font = .robotoBold16()
@@ -20,20 +20,19 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     }()
 
     
-    func setLabelDayOfWeek(name: String = "Mon") {
-        dayOfWeek.text = name
-        
-    }
-    
-    private let numberOfDay : UILabel = {
+    let numberOfDayLabel : UILabel = {
         let label = UILabel()
         label.font = .robotoBold20()
-        label.text = "29"
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    func cellConfigure(numberOfDay:String, dayOfWeek:String) {
+        numberOfDayLabel.text = numberOfDay
+        dayOfWeekLabel.text = dayOfWeek
+    }
     
     // Функция для клика на ячейку
     override var isSelected: Bool {
@@ -41,12 +40,12 @@ class CalendarCollectionViewCell: UICollectionViewCell {
             if isSelected {
                 backgroundColor = .specialYellow
                 layer.cornerRadius = 10
-                dayOfWeek.textColor = .specialBlack
-                numberOfDay.textColor = .specialDarkGreen
+                dayOfWeekLabel.textColor = .specialBlack
+                numberOfDayLabel.textColor = .specialDarkGreen
             } else {
                 backgroundColor = .specialGreen
-                dayOfWeek.textColor = .white
-                numberOfDay.textColor = .white
+                dayOfWeekLabel.textColor = .white
+                numberOfDayLabel.textColor = .white
                 
             }
             
@@ -68,19 +67,19 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        addSubview(dayOfWeek)
-        addSubview(numberOfDay)
+        addSubview(dayOfWeekLabel)
+        addSubview(numberOfDayLabel)
     }
     
     private func setConstrains() {
         NSLayoutConstraint.activate([
-            dayOfWeek.centerXAnchor.constraint(equalTo: centerXAnchor),
-            dayOfWeek.topAnchor.constraint(equalTo: topAnchor,constant: 7),
+            dayOfWeekLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            dayOfWeekLabel.topAnchor.constraint(equalTo: topAnchor,constant: 7),
             
         ])
         NSLayoutConstraint.activate([
-            numberOfDay.centerXAnchor.constraint(equalTo: centerXAnchor),
-            numberOfDay.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
+            numberOfDayLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            numberOfDayLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
             
         ])
     }
