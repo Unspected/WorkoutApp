@@ -7,6 +7,7 @@
 
 import Foundation
 import UserNotifications
+import UIKit
 
 class Notifications: NSObject {
     
@@ -25,4 +26,36 @@ class Notifications: NSObject {
         }
     }
     
+    func scheduleDateNotification(date: Date, id: String) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = "WORKOUT"
+        content.body = "Don't forget your training start in 5 minutes"
+        content.sound = .default
+        content.badge = 1
+        
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "PST")!
+        var triggerDate = calendar.dateComponents([.year, .month, .day], from: date)
+        triggerDate.hour = 12
+        triggerDate.minute = 46
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        notificationCenter.add(request) { error in
+            print("Error \(error?.localizedDescription ?? "error")")
+        }
+    }
+}
+
+extension Notifications: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        notificationCenter.removeAllDeliveredNotifications()
+    }
 }
