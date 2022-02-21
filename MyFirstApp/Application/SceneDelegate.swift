@@ -11,21 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         // MARK: - Настройка для отображения без сториборда
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = MainTabBarController()
-        //window?.rootViewController = NewWorkoutViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
-//        window? .windowScene = windowScene
-//        window?.makeKeyAndVisible()
-//        let controller = MainViewController()
-//        let navController = UINavigationController(rootViewController: controller)
-//        window?.rootViewController = navController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

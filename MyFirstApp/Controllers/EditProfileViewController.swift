@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-protocol EditProfileVCDelegate: AnyObject{
+protocol EditProfileVCDelegate: AnyObject {
     
     func renewVC()
 }

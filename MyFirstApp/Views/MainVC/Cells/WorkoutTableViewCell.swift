@@ -11,7 +11,6 @@ import UIKit
 protocol StartWorkoutProtocol : AnyObject {
     
     func startButtonTapped(model : WorkoutModel)
-    
 }
 
 class WorkoutTableViewCell: UITableViewCell {
