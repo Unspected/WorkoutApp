@@ -55,9 +55,10 @@ class MainViewController: UIViewController {
     //MARK: - FUNC Для ПЕРЕХОДА НА НОВЫЙ ЭКРАН
     @objc private func addWorkoutButtonTapped() {
         
-       let newController = NewWorkoutViewController()
-       newController.modalPresentationStyle = .fullScreen
-       present(newController, animated: true)
+        let newController = NewWorkoutViewController()
+        newController.modalPresentationStyle = .fullScreen
+        
+        present(newController, animated: true)
     }
     
     private let workoutTodayLabel : UILabel = {
@@ -135,24 +136,25 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         userArray = localRealm.objects(UserModel.self)
-        
         setUpViews()
         setConstrains()
         setDelegate()
         setupUserParameters()
         getWorkoutDate(date: Date().localDate())
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
+        
     
     }
     
+    //MARK: - DELEGATES
     private func setDelegate() {
+        
         tableView.delegate = self
         tableView.dataSource = self
         calendarView.cellCollectionViewDelegate = self
     }
     
-    // MARK: - setupViews ВСЕ ЭЛЕМЕНТЫ НУЖНО ДОБАВЛЯТЬ СЮДА!!!
-    // СЮДА ДОБАВЛЯТЬ ВСЕ ЭЛЕМЕНТЫ через ADDSomeView
+    // MARK: - setupViews all UIElements located here
     private func setUpViews() {
         view.backgroundColor = .specialBackground
         view.addSubview(calendarView)
@@ -186,7 +188,7 @@ class MainViewController: UIViewController {
         
         if userArray.count != 0 {
             userNameLabel.text = "\(userArray[0].userFirstName) \(userArray[0].userLastName)"
-            // Проверяем есть ли в БД Фото и
+            // Check the photo in DataBase
             guard let data = userArray[0].userImage else { return }
             //потом дальше проверяет фото и далее присваиваем фото
             guard let image = UIImage(data: data) else { return }
@@ -196,15 +198,17 @@ class MainViewController: UIViewController {
 }
 
 
+
+
 // MARK: - TableViewDataSource
 extension MainViewController : UITableViewDataSource {
     
-    // Количество Ячеек
+    // AMOUNT OF CELLS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         workoutArray.count
     }
     
-    // Инициализация ячейки
+    // INIT CELL
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
         let model = workoutArray[indexPath.row]
@@ -272,10 +276,10 @@ extension MainViewController : SelectCollectionViewItemProtocol {
 // MARK: - setConstrains
 extension MainViewController {
     
-    // Метод в котором задаем координаты элементов
+    // Coordinates our elements
     private func setConstrains() {
         
-        // Список констрейнтов для UserPhoto
+        // USER PHOTO
         NSLayoutConstraint.activate([
             userPhotoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             userPhotoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
@@ -283,7 +287,7 @@ extension MainViewController {
             userPhotoImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
-        // Позиционирование календаря
+        // CALENDAR BLOCK
         NSLayoutConstraint.activate([
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -292,7 +296,7 @@ extension MainViewController {
             calendarView.heightAnchor.constraint(equalToConstant: 70)
         ])
         
-        // Позиционирование Label Name
+        // USER LABEL NAME
         NSLayoutConstraint.activate([
             // Слева констрейнт мы отталиваемся от правого края userPhoto
             userNameLabel.leadingAnchor.constraint(equalTo: userPhotoImageView.trailingAnchor, constant: 5),
@@ -300,7 +304,7 @@ extension MainViewController {
             userNameLabel.bottomAnchor.constraint(equalTo: calendarView.topAnchor, constant: -10),
             userNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
-        
+        // Add Workout Button
         NSLayoutConstraint.activate([
             addWorkoutButton.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 5),
             addWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -308,7 +312,7 @@ extension MainViewController {
             addWorkoutButton.widthAnchor.constraint(equalToConstant: 80)
         ])
         
-        // Позиционирование блока погоды
+        // WEATHER BLOCK
         NSLayoutConstraint.activate([
             weatherBlock.leadingAnchor.constraint(equalTo: addWorkoutButton.trailingAnchor, constant: 10),
             weatherBlock.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 5),
@@ -317,12 +321,12 @@ extension MainViewController {
             weatherBlock.heightAnchor.constraint(equalToConstant: 80)
         ])
         
-        // WorkOut Label Today
+        //
         NSLayoutConstraint.activate([
             workoutTodayLabel.topAnchor.constraint(equalTo: addWorkoutButton.bottomAnchor, constant: 14),
             workoutTodayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 13)
         ])
-        
+        // TABLE VIEW
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 0),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),

@@ -8,6 +8,8 @@
 import UIKit
 import RealmSwift
 
+
+
 class NewWorkoutViewController: UIViewController {
     
     // Кнопка крестик для закрытия окна
@@ -139,6 +141,7 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutImage = imageData
     }
     
+    
     private func saveModel() {
         
         //precondition(nameTextField.text != "", "Text Field Empty")
@@ -152,6 +155,7 @@ class NewWorkoutViewController: UIViewController {
             guard workoutModel.workoutSets != 0 else { return simpleAlert(title: "Wrong value", message: "set Sets")}
             guard (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) else { return simpleAlert(title: "Wrong Value", message: "set count of Reps or set Timer")}
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            createNotification()
             workoutModel = WorkoutModel()
             dismiss(animated: true, completion: nil)
             refreshWorkoutObjects()
@@ -170,6 +174,13 @@ class NewWorkoutViewController: UIViewController {
         repsOrTimerView.repsSlider.value = 0
         repsOrTimerView.timerCountLabel.text = "0"
         repsOrTimerView.timerSlider.value = 0
+    }
+    
+    private func createNotification() {
+        let notifications = Notifications()
+        let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
+        print(workoutModel.workoutDate)
+        notifications.scheduleDateNotification(date: workoutModel.workoutDate, id: "workout" + stringDate)
     }
     
 }
