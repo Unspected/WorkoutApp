@@ -43,6 +43,9 @@ class CustomAlert {
                                  width: parentView.frame.width - 80, height: 420)
         parentView.addSubview(alertView)
         
+        let toucheAlert = UITapGestureRecognizer(target: self, action: #selector(hideFrame))
+        backgroundView.addGestureRecognizer(toucheAlert)
+        
         let sportsWoman = UIImageView(frame: CGRect(x: (alertView.frame.width - alertView.frame.width * 0.4) / 2,
                                                     y: 30,
                                                     width: alertView.frame.width * 0.4,
@@ -135,6 +138,26 @@ class CustomAlert {
         }
     }
     
+    // Close frame if click without frame
+    @objc private func hideFrame() {
+        guard let targetView = mainView else { return }
+        UIView.animate(withDuration: 0.3) {
+            self.alertView.frame = CGRect(x: 40, y: targetView.frame.height, width: targetView.frame.width - 80, height: 420)
+        } completion: { done in
+            if done {
+                UIView.animate(withDuration: 0.3) {
+                    self.backgroundView.alpha = 0
+                } completion: { done in
+                    if done {
+            
+                        self.alertView.removeFromSuperview()
+                        self.backgroundView.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
     @objc private func dismissAlert() {
         guard let setsNumber = setsTextField.text else { return }
         guard let repsNumber = repsTextField.text else { return }
@@ -162,4 +185,6 @@ class CustomAlert {
                 }
             }
         }
-    }}
+    }
+    
+}

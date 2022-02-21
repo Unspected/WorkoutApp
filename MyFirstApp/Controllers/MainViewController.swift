@@ -120,10 +120,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    func reloadTableView() {
-        tableView.reloadData()
-    }
-    
     // Прочитать про этот метод
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -221,7 +217,7 @@ extension MainViewController : UITableViewDataSource {
     
 }
 
-// MARK: - UITableViewDelegate ВЫСОТА ЯЧЕЙКИ
+// MARK: - UITableViewDelegate Height Cells
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -27,11 +27,13 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
 
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "PST")!
         let day = calendar.component(.day, from: self)
         let month = calendar.component(.month, from: self)
         let year = calendar.component(.year, from: self)
         let dateStart = formatter.date(from: "\(year)/\(month)/\(day)") ?? Date()
+        
         let local = dateStart.localDate()
         let dateEnd: Date = {
             let components = DateComponents(day: 1)

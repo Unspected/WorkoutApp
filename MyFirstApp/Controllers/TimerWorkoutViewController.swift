@@ -18,6 +18,7 @@ class TimerWorkoutViewController : UIViewController {
     }()
     
     @objc private func closeButtonTapped() {
+        timer.invalidate()
         dismiss(animated: true, completion: nil)
     }
     
@@ -57,7 +58,7 @@ class TimerWorkoutViewController : UIViewController {
     }()
     
     @objc private func finishButtonTapped() {
-        // Добавить количество сетс NumberOfSets
+        // Add incriment to sets after done timer
         if numberOfSet == workoutModel.workoutSets {
             dismiss(animated: true, completion: nil)
             RealmManager.shared.updateStatusWorkoutModel(model: workoutModel, bool: true)
@@ -66,7 +67,9 @@ class TimerWorkoutViewController : UIViewController {
             alertOkCancel(title: "Warning", message: "You have not finish your excercise") {
                 self.dismiss(animated: true, completion: nil)
             }
-    }}
+    }
+        timer.invalidate()
+    }
     
     // MARK: - Details Form
     private let timerWorkoutParametersView = TimerWorkoutParametersView()
@@ -118,31 +121,60 @@ class TimerWorkoutViewController : UIViewController {
         
         let (min, sec) = workoutModel.workoutTimer.convertToSecond()
         timerWorkoutParametersView.numberOfTimerLabel.text = "\(min) min \(sec) sec"
+        
+        timerLabel.text = "\(min):\(sec.setZeroForSeconds())"
+        durationTimer = workoutModel.workoutTimer
     }
     
     private func addTaps() {
         // Вызываем UITapGesture
+        
         let tapLabel = UITapGestureRecognizer(target: self, action: #selector(startTimer))
         // Необохдимо иницилизировать для работы в true
         timerLabel.isUserInteractionEnabled = true
         // Добавляем действие по тапу на наш лэйбл
         timerLabel.addGestureRecognizer(tapLabel)
+        
     }
+    
     
     @objc private func startTimer() {
-        
-        basicAnimation()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction),
-                                     userInfo: nil, repeats: true)
+        if numberOfSet == workoutModel.workoutSets {
+            simpleAlert(title: "Error", message: "Finish your workout")
+        } else  {
+            if untouchableTimer  {
+                untouchableTimer = false
+            basicAnimation()
+            timer = Timer.scheduledTimer(timeInterval: 1,
+                                         target: self,
+                                         selector: #selector(timerAction),
+                                         userInfo: nil,
+                                         repeats: true)
+            timerWorkoutParametersView.editingButton.isEnabled = false
+                timerWorkoutParametersView.nextSetsButton.isEnabled = false
+                
+            }
+        }
     }
     
+    // variable for secure Timer, check status timer before start
+    private var untouchableTimer: Bool = true
+    // Метод который занимаеться отсчетом таймера
     @objc private func timerAction() {
         durationTimer -= 1
-        print(durationTimer)
-        
         if durationTimer == 0 {
             timer.invalidate()
+            durationTimer = workoutModel.workoutTimer
+            
+            numberOfSet += 1
+            timerWorkoutParametersView.numberOfSetsLabel.text  = "\(numberOfSet)/\(workoutModel.workoutSets)"
+            
+            timerWorkoutParametersView.editingButton.isEnabled = true
+            timerWorkoutParametersView.nextSetsButton.isEnabled = true
+            untouchableTimer = true
         }
+        let (min,sec) = durationTimer.convertToSecond()
+        timerLabel.text =  "\(min):\(sec.setZeroForSeconds())"
     }
 }
 
@@ -158,10 +190,11 @@ extension TimerWorkoutViewController {
         
         let circularPath = UIBezierPath(arcCenter: center, radius: 114, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
-        // Путь траектория по которой пододет линию
+        //MARK: - Drow Line for Animation
+        // Way animation
         shapeLayer.path = circularPath.cgPath
-        // Толщина линии
-        shapeLayer.lineWidth = 21
+        // Line thickness
+        shapeLayer.lineWidth = 19
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeEnd = 1
         shapeLayer.lineCap = .round
@@ -196,7 +229,7 @@ extension TimerWorkoutViewController: NextSetTimerProtocol {
     
     func editingTimerTapped() {
         customAlert.alertCustom(viewController: self, repsOrTimer: "Timer of set") { [self] sets, timerOfset in
-
+            
             if sets != "" && timerOfset != "" {
                 guard let numberOfSets = Int(sets) else { return }
                 guard let numberOfTimer = Int(timerOfset) else { return }

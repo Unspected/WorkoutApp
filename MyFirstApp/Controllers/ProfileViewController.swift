@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
         
     }()
     
-    private let collectionViewProfile: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionVIew = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -127,8 +127,8 @@ class ProfileViewController: UIViewController {
     
     private func setDelegates() {
         
-        collectionViewProfile.dataSource = self
-        collectionViewProfile.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     private func setupViews() {
@@ -141,8 +141,8 @@ class ProfileViewController: UIViewController {
                                         axis: .horizontal, spacing: 10)
         view.addSubview(userInfoStackView)
         view.addSubview(editProfileButton)
-        view.addSubview(collectionViewProfile)
-        collectionViewProfile.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: idProfileCollectionViewCell)
+        view.addSubview(collectionView)
+        collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: idProfileCollectionViewCell)
         view.addSubview(targetLabel)
         
     }
@@ -188,7 +188,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCollectionViewCell, for: indexPath) as! ProfileCollectionViewCell
-        cell.backgroundColor = .red
+        cell.backgroundColor = .specialYellow
         return cell
     }
     
@@ -199,7 +199,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     
     //MARK: - Size The Cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionViewProfile.frame.width / 2.07, height: 120)
+        CGSize(width: collectionView.frame.width / 2.07, height: 120)
     }
     
     // MARK: - Spacing beetwin cells
@@ -254,14 +254,14 @@ extension ProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            collectionViewProfile.topAnchor.constraint(equalTo: userInfoStackView.bottomAnchor, constant: 25),
-            collectionViewProfile.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            collectionViewProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            collectionViewProfile.heightAnchor.constraint(equalToConstant: 250)
+            collectionView.topAnchor.constraint(equalTo: userInfoStackView.bottomAnchor, constant: 25),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            collectionView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
         NSLayoutConstraint.activate([
-            targetLabel.topAnchor.constraint(equalTo: collectionViewProfile.bottomAnchor, constant: 23),
+            targetLabel.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 23),
             targetLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
     }
