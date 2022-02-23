@@ -132,6 +132,13 @@ class MainViewController: UIViewController {
         setupUserParameters()
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showOnboarding()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -193,6 +200,17 @@ class MainViewController: UIViewController {
             //потом дальше проверяет фото и далее присваиваем фото
             guard let image = UIImage(data: data) else { return }
             userPhotoImageView.image = image
+        }
+    }
+    
+    // MARK: - UserDefault Settings
+    private func showOnboarding() {
+        let userDefaults = UserDefaults.standard
+        let onBoardingWasViewed = userDefaults.bool(forKey: "OnBoardingWasViewed")
+        if onBoardingWasViewed == false {
+            let onboardingViewController = OnboardingViewController()
+            onboardingViewController.modalPresentationStyle = .fullScreen
+            present(onboardingViewController, animated: false)
         }
     }
 }
