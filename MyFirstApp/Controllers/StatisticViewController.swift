@@ -60,7 +60,8 @@ class StatisticViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setStartScreen()
+        
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -69,6 +70,7 @@ class StatisticViewController: UIViewController {
         setupVIews()
         setDelegates()
         setConstrains()
+        setStartScreen()
        
     }
     

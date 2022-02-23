@@ -91,6 +91,8 @@ class WorkoutTableViewCell: UITableViewCell {
         cellStartWorkoutDelegate?.startButtonTapped(model: workoutModel)
     }
     
+    
+    
     // Заполняем модель данными из полей
     func cellConfigure(model: WorkoutModel) {
         
