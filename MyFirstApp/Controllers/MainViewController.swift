@@ -203,7 +203,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    // MARK: - UserDefault Settings
+    // MARK: - UserDefault Settings Screen Before Starting App
     private func showOnboarding() {
         let userDefaults = UserDefaults.standard
         let onBoardingWasViewed = userDefaults.bool(forKey: "OnBoardingWasViewed")
