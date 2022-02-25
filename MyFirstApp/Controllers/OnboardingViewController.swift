@@ -34,7 +34,8 @@ class OnboardingViewController: UIViewController {
        let pageControl = UIPageControl()
         pageControl.numberOfPages = 3
         pageControl.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
-        pageControl.isEnabled = false
+        pageControl.isEnabled = true
+        pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         return pageControl
     }()
@@ -66,8 +67,8 @@ class OnboardingViewController: UIViewController {
     }
     
     private func setupViews() {
+    
         view.backgroundColor = .specialGreen
-
         view.addSubview(nextButton)
         view.addSubview(pageControl)
         view.addSubview(collectionView)
@@ -101,7 +102,6 @@ class OnboardingViewController: UIViewController {
         if collectionItem == 1 {
             nextButton.setTitle("START", for: .normal)
         }
-        
         if collectionItem == 2 {
             saveUserDefaults()
         } else {
@@ -112,6 +112,21 @@ class OnboardingViewController: UIViewController {
         }
     }
     
+    //MARK: - for choose value on click dots in PageControl
+    @objc private func pageControlTapped(_ sender: UIPageControl) {
+        let current = sender.currentPage
+        let index: IndexPath = [0 , current]
+        // Method for to change Value
+        collectionItem = current
+        if current == 2 {
+            nextButton.setTitle("START", for: .normal)
+        } else {
+            nextButton.setTitle("NEXT", for: .normal)
+        }
+        collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+        
+    }
+    
     // MARK: - Save in UserDefaults
     private func saveUserDefaults() {
         let userDefaults = UserDefaults.standard
@@ -119,6 +134,9 @@ class OnboardingViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+
 
 //MARK: - UICollectionViewDataSource
 extension OnboardingViewController: UICollectionViewDataSource {
@@ -133,15 +151,19 @@ extension OnboardingViewController: UICollectionViewDataSource {
         cell.cellConfigure(model: model)
         return cell
     }
+    
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width, height: collectionView.frame.height)
     }
 }
+
+
 
 extension OnboardingViewController {
     
