@@ -20,6 +20,8 @@
 		E963DD1D279FDC1400B0B889 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E963DD1C279FDC1400B0B889 /* RealmManager.swift */; };
 		E968CA1C27A3CE4E00C2AE7F /* alertOkCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E968CA1B27A3CE4E00C2AE7F /* alertOkCancel.swift */; };
 		E97183B127B0A9C800E1BB20 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97183B027B0A9C800E1BB20 /* ProfileCollectionViewCell.swift */; };
+		E971A2AF27D086EF005C3301 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971A2AE27D086EF005C3301 /* CurrentWeather.swift */; };
+		E971A2B127D08719005C3301 /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E971A2B027D08719005C3301 /* CurrentWeatherData.swift */; };
 		E97863EF27A8DA950062D86E /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97863EE27A8DA950062D86E /* CustomAlert.swift */; };
 		E9829D6727C582FD00081588 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9829D6627C582FD00081588 /* OnboardingViewController.swift */; };
 		E9829D6B27C5837A00081588 /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9829D6A27C5837A00081588 /* OnboardingCollectionViewCell.swift */; };
@@ -51,6 +53,7 @@
 		E9A8124627A7B29E00C9AD71 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */; };
 		E9A8C775279FEE6000E43B64 /* SimpleAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */; };
 		E9F0C67D27ABB57700FBBA89 /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */; };
+		E9FEC8F827C9E11D007D2D49 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,8 @@
 		E963DD1C279FDC1400B0B889 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E968CA1B27A3CE4E00C2AE7F /* alertOkCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alertOkCancel.swift; sourceTree = "<group>"; };
 		E97183B027B0A9C800E1BB20 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		E971A2AE27D086EF005C3301 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		E971A2B027D08719005C3301 /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
 		E97863EE27A8DA950062D86E /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		E9829D6627C582FD00081588 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E9829D6A27C5837A00081588 /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 		E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
 		E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlerts.swift; sourceTree = "<group>"; };
 		E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
+		E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,7 @@
 		E992D360279240E3006791F1 /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
+				E9FEC8F627C9E0DB007D2D49 /* Network */,
 				E992D37B2792419C006791F1 /* Views */,
 				E992D37927924182006791F1 /* Models */,
 				E992D3772792415D006791F1 /* Controllers */,
@@ -347,6 +354,16 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		E9FEC8F627C9E0DB007D2D49 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */,
+				E971A2AE27D086EF005C3301 /* CurrentWeather.swift */,
+				E971A2B027D08719005C3301 /* CurrentWeatherData.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,6 +456,8 @@
 				E9599AE427B1A9A3000C31FD /* UserModel.swift in Sources */,
 				E992D38427924815006791F1 /* UIStackView + Extensions.swift in Sources */,
 				E9853E8D27C1F3EF00CB413C /* Notifications.swift in Sources */,
+				E971A2AF27D086EF005C3301 /* CurrentWeather.swift in Sources */,
+				E9FEC8F827C9E11D007D2D49 /* NetworkRequest.swift in Sources */,
 				E98B0AC72799372100D3F6A9 /* DateAndRepeatView.swift in Sources */,
 				E97863EF27A8DA950062D86E /* CustomAlert.swift in Sources */,
 				E992D380279246EA006791F1 /* UIFont + Extensions.swift in Sources */,
@@ -449,6 +468,7 @@
 				E91A8BFD279B4C820095B818 /* MainTabBarController.swift in Sources */,
 				E97183B127B0A9C800E1BB20 /* ProfileCollectionViewCell.swift in Sources */,
 				E9A8C775279FEE6000E43B64 /* SimpleAlerts.swift in Sources */,
+				E971A2B127D08719005C3301 /* CurrentWeatherData.swift in Sources */,
 				E992D38E2793F1F1006791F1 /* CalendarCollectionViewCell.swift in Sources */,
 				E98B0AC9279A6BDB00D3F6A9 /* RepsOrTimerView.swift in Sources */,
 				E9829D6B27C5837A00081588 /* OnboardingCollectionViewCell.swift in Sources */,

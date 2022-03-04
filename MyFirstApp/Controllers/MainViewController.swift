@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
 class MainViewController: UIViewController {
     
@@ -96,7 +97,7 @@ class MainViewController: UIViewController {
         return image
     }()
     
-    // новый блок погоды
+    // MARK: - WeatherBlock
     private let weatherBlock = WeatherBlock()
     // Импорт класса в котором вся логика
     private let calendarView = CalendarView()
@@ -110,16 +111,16 @@ class MainViewController: UIViewController {
     private var workoutArray: Results<WorkoutModel>!
     private var userArray: Results<UserModel>!
     
-    // check TableView Cells
-    private func screenWithoutCells() {
-        if workoutArray.count == 0 {
-            tableView.isHidden = true
-            nonTableViewImage.isHidden = false
-        } else {
-            tableView.isHidden = false
-            nonTableViewImage.isHidden = true
-        }
-    }
+    //MARK: - networkManager
+    var networkManager = NetworkWeatherManager()
+    
+    //MARK: - locationManager
+    var locationManager: CLLocationManager = {
+        let lm = CLLocationManager()
+        lm.desiredAccuracy = kCLLocationAccuracyBest
+        lm.requestWhenInUseAuthorization()
+        return lm
+    }()
     
     // Прочитать про этот метод
     override func viewDidLayoutSubviews() {
@@ -132,15 +133,14 @@ class MainViewController: UIViewController {
         setupUserParameters()
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         showOnboarding()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         userArray = localRealm.objects(UserModel.self)
         setUpViews()
@@ -150,15 +150,15 @@ class MainViewController: UIViewController {
         getWorkoutDate(date: Date().localDate())
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
         
-    
+        
     }
     
     //MARK: - DELEGATES
     private func setDelegate() {
-        
         tableView.delegate = self
         tableView.dataSource = self
         calendarView.cellCollectionViewDelegate = self
+        locationManager.delegate = self
     }
     
     // MARK: - setupViews all UIElements located here
@@ -172,6 +172,16 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         view.addSubview(nonTableViewImage)
+    }
+    
+    private func screenWithoutCells() {
+        if workoutArray.count == 0 {
+            tableView.isHidden = true
+            nonTableViewImage.isHidden = false
+        } else {
+            tableView.isHidden = false
+            nonTableViewImage.isHidden = true
+        }
     }
     
     private func getWorkoutDate(date: Date) {
@@ -192,7 +202,6 @@ class MainViewController: UIViewController {
     }
     
     private func setupUserParameters() {
-        
         if userArray.count != 0 {
             userNameLabel.text = "\(userArray[0].userFirstName) \(userArray[0].userLastName)"
             // Check the photo in DataBase
@@ -213,9 +222,43 @@ class MainViewController: UIViewController {
             present(onboardingViewController, animated: false)
         }
     }
+    
+    //MARK: - Update Interface with Api
+    private func updateInterfaceWeather(weather: CurrentWeather) {
+        DispatchQueue.main.async {
+            self.weatherBlock.weatherTitle.text = ("\(weather.weatherDescription)  \(weather.temperatureString)℃").capitalized
+            self.weatherBlock.weatherContent.text = "feels like: \(weather.feelsLikeTemperatureString)℃"
+            self.weatherBlock.sunImg.image = UIImage(named: weather.systemIconNameString)
+        }
+    }
+    
 }
 
+// MARK: - LocationDelegate
+extension MainViewController: CLLocationManagerDelegate {
 
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return}
+        let latitude = location.coordinate.latitude
+        let longtitude = location.coordinate.longitude
+
+        networkManager.fetchCurrentWeather(requestType: .coordinate(latitude: latitude, longtitude: longtitude)) { currentWeather in
+            self.updateInterfaceWeather(weather: currentWeather)
+
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    // DID AUTORIZATION FOR YOU REQUEST
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+            }
+        }
+}
 
 
 // MARK: - TableViewDataSource
