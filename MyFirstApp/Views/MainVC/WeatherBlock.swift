@@ -6,31 +6,32 @@
 //
 
 import UIKit
+import CoreLocation
 
 class WeatherBlock: UIView {
     
-    
     // Картинка Солнышко
-    private let sunImg: UIImageView = {
+    let sunImg: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "sunIcon")
+        image.contentMode = .scaleAspectFit
+        //image.image = UIImage(named: "sunIcon")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     // Заголовок
-    private let weatherTitle: UILabel = {
+    let weatherTitle: UILabel = {
         let label = UILabel()
-        label.text = "Солнечно"
+        //label.text = "Солнечно"
         label.font = .robotoMedium18()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     // Описание контента под заголовком
-    private let weatherContent: UILabel = {
+    var weatherContent: UILabel = {
         let label = UILabel()
-        label.text = "Хорошая погода, чтобы позаниматься на улице"
+        //label.text = "Хорошая погода, чтобы позаниматься на улице"
         label.font = .robotoMedium14()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = #colorLiteral(red: 0.8044065833, green: 0.8044064641, blue: 0.8044064641, alpha: 1)
@@ -38,14 +39,11 @@ class WeatherBlock: UIView {
         return label
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupView()
         setConstrains()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -54,13 +52,15 @@ class WeatherBlock: UIView {
     
     private func setupView() {
         layer.cornerRadius = 10
-        backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
+        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         translatesAutoresizingMaskIntoConstraints = false
         addShadowOnView()
         addSubview(sunImg)
         addSubview(weatherTitle)
         addSubview(weatherContent)
     }
+    
+
     
     private func setConstrains() {
         var const = [NSLayoutConstraint]()
@@ -81,3 +81,4 @@ class WeatherBlock: UIView {
         NSLayoutConstraint.activate(const)
     }
 }
+

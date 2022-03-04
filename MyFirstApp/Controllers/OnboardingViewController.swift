@@ -112,7 +112,7 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    //MARK: - for choose value on click dots in PageControl
+    //MARK: - Index for Dot and Correctly transition
     @objc private func pageControlTapped(_ sender: UIPageControl) {
         let current = sender.currentPage
         let index: IndexPath = [0 , current]
