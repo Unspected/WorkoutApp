@@ -50,6 +50,16 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         addSubview(counterLabel)
     }
     
+    //MARK: - setModel 
+    func cellConfigure(model: ResultWorkout) {
+        nameLabel.text = model.name
+        counterLabel.text = "\(model.result)"
+        
+        guard let data = model.imageData else { return }
+        let image = UIImage(data: data)
+        workoutImageView.image = image
+    }
+    
     private func setConstrains() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),

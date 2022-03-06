@@ -131,6 +131,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
         setupUserParameters()
+        screenWithoutCells()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,7 +141,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         userArray = localRealm.objects(UserModel.self)
         setUpViews()
@@ -197,7 +197,6 @@ class MainViewController: UIViewController {
         
         // Вызываем список
         workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
-        screenWithoutCells()
         tableView.reloadData()
     }
     
@@ -244,14 +243,12 @@ extension MainViewController: CLLocationManagerDelegate {
 
         networkManager.fetchCurrentWeather(requestType: .coordinate(latitude: latitude, longtitude: longtitude)) { currentWeather in
             self.updateInterfaceWeather(weather: currentWeather)
-
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
-    
     // DID AUTORIZATION FOR YOU REQUEST
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
@@ -289,13 +286,14 @@ extension MainViewController: UITableViewDelegate {
         100
     }
     
-    // Свайп для каких либо действий в ячейке
+    // MARK: - Delete Cell
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
             let deleteModel = self.workoutArray[indexPath.row]
             RealmManager.shared.deleteWorkoutModel(model: deleteModel)
             tableView.reloadData()
+            self.screenWithoutCells()
         }
         action.backgroundColor = .specialBackground
         action.image = UIImage(named: "delete")
