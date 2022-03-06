@@ -8,6 +8,12 @@
 import UIKit
 import RealmSwift
 
+struct ResultWorkout {
+    let name: String
+    let result: Int
+    let imageData: Data?
+}
+
 class ProfileViewController: UIViewController {
     
     private let profileLabel: UILabel = UILabel(font24: "PROFILE")
@@ -99,15 +105,20 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    
     private let localRealm = try! Realm()
     private var userArray: Results<UserModel>!
-    
+    private var workoutArray: Results<WorkoutModel>!
     private let idProfileCollectionViewCell = "MyCell"
     
+    private var resultWorkout = [ResultWorkout]()
+    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupUserParameters()
+        getWorkoutResults()
+        collectionView.reloadData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -116,12 +127,11 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         userArray = localRealm.objects(UserModel.self)
         setupViews()
         setConstrains()
         setDelegates()
-        
+        collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: idProfileCollectionViewCell)
         
     }
     
@@ -160,12 +170,43 @@ class ProfileViewController: UIViewController {
             userHeightLabel.text = "Height: \(userArray[0].userHeight)"
             userWeightLabel.text = "Weight: \(userArray[0].userWeight)"
             targetLabel.text = "TARGET: \(userArray[0].userTarget) workouts"
-            
-            // Проверяем есть ли в БД Фото и
+            // Check the photo in DataBase
             guard let data = userArray[0].userImage else { return }
-            //потом дальше проверяет фото и далее присваиваем фото
+            // set Image
             guard let image = UIImage(data: data) else { return }
             userPhotoImageView.image = image
+        }
+    }
+    
+    // Check in Array
+    private func getWorkoutsName() -> [String] {
+        var nameArray = [String]()
+        workoutArray = localRealm.objects(WorkoutModel.self)
+
+        for workoutModel in workoutArray {
+            if !nameArray.contains(workoutModel.workoutName) {
+                nameArray.append(workoutModel.workoutName)
+            }
+        }
+        return nameArray
+    }
+    
+    //MARK: - Results
+    private func getWorkoutResults() {
+        
+        resultWorkout.removeAll()
+        let nameArray = getWorkoutsName()
+        for name in nameArray {
+            let predicateName = NSPredicate(format: "workoutName = '\(name)'")
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateName).sorted(byKeyPath: "workoutName")
+            var result = 0
+            var image: Data?
+            workoutArray.forEach { model in
+                result += model.workoutReps
+                image = model.workoutImage
+            }
+            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            resultWorkout.append(resultModel)
         }
     }
 }
@@ -174,21 +215,20 @@ extension ProfileViewController: EditProfileVCDelegate {
     func renewVC() {
         setupUserParameters()
     }
-    
 }
-
-
 // MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource {
     
     //MARK: - quantity of cells in CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        6
+        resultWorkout.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idProfileCollectionViewCell, for: indexPath) as! ProfileCollectionViewCell
-        cell.backgroundColor = .specialYellow
+        let model = resultWorkout[indexPath.row]
+        cell.cellConfigure(model: model)
+        cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialGreen : .specialDarkYellow)
         return cell
     }
     
