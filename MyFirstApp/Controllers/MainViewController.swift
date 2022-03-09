@@ -122,7 +122,6 @@ class MainViewController: UIViewController {
         return lm
     }()
     
-    // Прочитать про этот метод
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
     }
@@ -149,8 +148,6 @@ class MainViewController: UIViewController {
         setupUserParameters()
         getWorkoutDate(date: Date().localDate())
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
-        
-        
     }
     
     //MARK: - DELEGATES
@@ -160,6 +157,7 @@ class MainViewController: UIViewController {
         calendarView.cellCollectionViewDelegate = self
         locationManager.delegate = self
     }
+    
     
     // MARK: - setupViews all UIElements located here
     private func setUpViews() {

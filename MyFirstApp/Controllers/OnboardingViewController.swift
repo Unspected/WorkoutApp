@@ -151,7 +151,6 @@ extension OnboardingViewController: UICollectionViewDataSource {
         cell.cellConfigure(model: model)
         return cell
     }
-    
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -161,6 +160,7 @@ extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: view.frame.width, height: collectionView.frame.height)
     }
+    
 }
 
 

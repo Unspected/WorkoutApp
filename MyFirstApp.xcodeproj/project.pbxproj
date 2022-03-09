@@ -52,6 +52,7 @@
 		E992D38E2793F1F1006791F1 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E992D38D2793F1F1006791F1 /* CalendarCollectionViewCell.swift */; };
 		E9A8124627A7B29E00C9AD71 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */; };
 		E9A8C775279FEE6000E43B64 /* SimpleAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */; };
+		E9D1874D27D6E63800E6C5F3 /* NewWorkoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D1874C27D6E63800E6C5F3 /* NewWorkoutCell.swift */; };
 		E9F0C67D27ABB57700FBBA89 /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */; };
 		E9FEC8F827C9E11D007D2D49 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		E992D38D2793F1F1006791F1 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		E9A8124527A7B29E00C9AD71 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
 		E9A8C774279FEE6000E43B64 /* SimpleAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlerts.swift; sourceTree = "<group>"; };
+		E9D1874C27D6E63800E6C5F3 /* NewWorkoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutCell.swift; sourceTree = "<group>"; };
 		E9F0C67C27ABB57700FBBA89 /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
 		E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +188,7 @@
 		E98B0AC527990EED00D3F6A9 /* NewWorkoutVC */ = {
 			isa = PBXGroup;
 			children = (
+				E9D1874B27D6E5EA00E6C5F3 /* Cells */,
 				E98B0AC62799372100D3F6A9 /* DateAndRepeatView.swift */,
 				E98B0AC8279A6BDB00D3F6A9 /* RepsOrTimerView.swift */,
 			);
@@ -354,6 +357,14 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		E9D1874B27D6E5EA00E6C5F3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E9D1874C27D6E63800E6C5F3 /* NewWorkoutCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		E9FEC8F627C9E0DB007D2D49 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +494,7 @@
 				E963DD1D279FDC1400B0B889 /* RealmManager.swift in Sources */,
 				E992D38227924774006791F1 /* UIView + Extensions.swift in Sources */,
 				E92F58EB27B35A4C0045E072 /* TimerWorkoutParametersView.swift in Sources */,
+				E9D1874D27D6E63800E6C5F3 /* NewWorkoutCell.swift in Sources */,
 				E992D364279240E3006791F1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

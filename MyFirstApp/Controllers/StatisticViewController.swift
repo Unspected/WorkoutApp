@@ -60,8 +60,7 @@ class StatisticViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.reloadData()
+        setStartScreen()
     }
     
     override func viewDidLoad() {
@@ -70,14 +69,12 @@ class StatisticViewController: UIViewController {
         setupVIews()
         setDelegates()
         setConstrains()
-        setStartScreen()
-       
+        
     }
     
     private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     private func setStartScreen() {
@@ -111,12 +108,10 @@ class StatisticViewController: UIViewController {
     private func getDifferenceModel(dateStart: Date) {
         
         differenceArray.removeAll()
-        
         let dateEnd = Date().localDate()
         let nameArray = getWorkoutNames()
         
         for name in nameArray {
-            
             let predicateDifference = NSPredicate(format: "workoutName = '\(name)' AND workoutDate BETWEEN %@",[dateStart,dateEnd])
             workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateDifference).sorted(byKeyPath: "workoutDate")
             

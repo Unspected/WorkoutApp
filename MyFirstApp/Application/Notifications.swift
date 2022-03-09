@@ -27,7 +27,6 @@ class Notifications: NSObject {
     }
     
     func scheduleDateNotification(date: Date, id: String) {
-        
         // Content for Notification alert
         let content = UNMutableNotificationContent()
         content.title = "WORKOUT"
