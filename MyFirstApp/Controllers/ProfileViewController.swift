@@ -86,7 +86,9 @@ class ProfileViewController: UIViewController {
     }()
     
     private let collectionView: UICollectionView = {
+        // init settings UICollection
         let layout = UICollectionViewFlowLayout()
+        // type scrolling
         layout.scrollDirection = .horizontal
         let collectionVIew = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionVIew.translatesAutoresizingMaskIntoConstraints = false

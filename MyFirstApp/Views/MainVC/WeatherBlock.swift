@@ -14,7 +14,8 @@ class WeatherBlock: UIView {
     let sunImg: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        //image.image = UIImage(named: "sunIcon")
+        image.image = UIImage(systemName: "nosign")
+        image.tintColor = .black
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -22,7 +23,6 @@ class WeatherBlock: UIView {
     // Заголовок
     let weatherTitle: UILabel = {
         let label = UILabel()
-        //label.text = "Солнечно"
         label.font = .robotoMedium18()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -31,7 +31,7 @@ class WeatherBlock: UIView {
     // Описание контента под заголовком
     var weatherContent: UILabel = {
         let label = UILabel()
-        //label.text = "Хорошая погода, чтобы позаниматься на улице"
+        label.text = "System can't get your location"
         label.font = .robotoMedium14()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = #colorLiteral(red: 0.8044065833, green: 0.8044064641, blue: 0.8044064641, alpha: 1)
@@ -71,6 +71,7 @@ class WeatherBlock: UIView {
         
         const.append(weatherTitle.topAnchor.constraint(equalTo: topAnchor, constant: 10))
         const.append(weatherTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11))
+        
         const.append(weatherTitle.heightAnchor.constraint(equalToConstant: 21))
         
         const.append(weatherContent.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11))

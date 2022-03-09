@@ -52,6 +52,21 @@ class NewWorkoutViewController: UIViewController {
     
     private let repsOrTimerView = RepsOrTimerView()
     
+    //MARK: - Images for choose
+    private let collectionView: UICollectionView = {
+        // init settings UICollection
+        let layout = UICollectionViewFlowLayout()
+        // type scrolling
+        layout.scrollDirection = .horizontal
+        let collectionVIew = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionVIew.translatesAutoresizingMaskIntoConstraints = false
+        collectionVIew.bounces = false
+        collectionVIew.layer.cornerRadius = 10
+        collectionVIew.showsHorizontalScrollIndicator = false
+        collectionVIew.backgroundColor = .specialBrown
+        return collectionVIew
+    }()
+    
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +92,11 @@ class NewWorkoutViewController: UIViewController {
     private var workoutModel = WorkoutModel()
     
     // MARK: - ТЕСТОВОЕ ИЗОБРАЖЕНИЕ НУЖНО БУДЕТ СМЕНИТЬ В БУДУЩЕМ
-    private let imageTest = UIImage(named: "heavyItem")
+    private var currentImage: UIImage?
+    private let collectionImages = ["heavyItem","1","2","3","4"]
+    private var imageTest = UIImage(named: "heavyItem")
+    
+    private let collectionViewIDCell = "collectionViewIDCell"
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +108,7 @@ class NewWorkoutViewController: UIViewController {
         
     }
     
-    // MARK: ВСЕ КНОПКИ ДОБАВЛЯТЬ СЮДА!!!
+    // MARK: All have to locate here
     private func setUpViews() {
         view.backgroundColor = .specialBackground
         view.addSubview(closeButton)
@@ -100,11 +119,15 @@ class NewWorkoutViewController: UIViewController {
         view.addSubview(dateAndRepeatView)
         view.addSubview(repsOrTimerLabel)
         view.addSubview(repsOrTimerView)
+        view.addSubview(collectionView)
         view.addSubview(saveButton)
+        collectionView.register(NewWorkoutCell.self, forCellWithReuseIdentifier: collectionViewIDCell)
 
     }
     private func setDelegates() {
         nameTextField.delegate = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     // Функция скрытия клавиатуры
@@ -137,10 +160,9 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutReps = Int(repsOrTimerView.repsSlider.value)
         workoutModel.workoutTimer = Int(repsOrTimerView.timerSlider.value)
         
-        guard let imageData = imageTest?.pngData() else { return }
+        guard let imageData = currentImage?.pngData() else { return}
         workoutModel.workoutImage = imageData
     }
-    
     
     private func saveModel() {
         
@@ -154,6 +176,7 @@ class NewWorkoutViewController: UIViewController {
         if count != 0 {
             guard workoutModel.workoutSets != 0 else { return simpleAlert(title: "Wrong value", message: "set Sets")}
             guard (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) else { return simpleAlert(title: "Wrong Value", message: "set count of Reps or set Timer")}
+            guard (workoutModel.workoutImage != nil) else { return simpleAlert(title: "You've didn't choose image", message: "pick the image")}
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
             createNotification()
             workoutModel = WorkoutModel()
@@ -181,6 +204,53 @@ class NewWorkoutViewController: UIViewController {
         let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
         print(workoutModel.workoutDate)
         notifications.scheduleDateNotification(date: workoutModel.workoutDate, id: "workout" + stringDate)
+    }
+    
+}
+
+extension NewWorkoutViewController: UICollectionViewDataSource,UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        collectionImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewIDCell, for: indexPath) as! NewWorkoutCell
+        let model = collectionImages[indexPath.row]
+        cell.cellConfigure(name: model)
+        return cell
+    }
+    
+    // MARK: - select certain Item and save for proccess it
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.gray.cgColor
+        if let cell = cell as? NewWorkoutCell {
+            currentImage = cell.imageView.image
+        }
+    }
+    
+    //MARK: - action for remove all style from cell
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return}
+        cell.layer.borderColor = UIColor.clear.cgColor
+        cell.layer.borderWidth = 0
+    }
+    
+    
+}
+
+extension NewWorkoutViewController: UICollectionViewDelegateFlowLayout {
+    
+    //MARK: - Size The Cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: 65, height: 65)
+    }
+    
+    // MARK: - Spacing beetwin cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        5
     }
     
 }
@@ -252,9 +322,16 @@ extension NewWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
+            collectionView.heightAnchor.constraint(equalToConstant: 72)
+        ])
+        
+        NSLayoutConstraint.activate([
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
-            saveButton.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 25),
+            saveButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 25),
             saveButton.heightAnchor.constraint(equalToConstant: 55)
         ])
         
