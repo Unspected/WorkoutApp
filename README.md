@@ -1,7 +1,13 @@
-# WorkoutApp
+<h1 align='center'>Workout App</h1>
 
-> WorkoutApp helps to maintain a training calendar, when creating workouts, 
-> options are available, set a timer or the number of sets. There is also a statistics screen where you can track all workouts for a week or a month,
->  and the last screen is a profile where you can add information about yourself and write your goal
+![image](https://img.shields.io/badge/language-swift%205-orange) ![image1](https://img.shields.io/badge/framework-UIKit-blue)
 
-![This is an image](https://drive.google.com/file/d/1s0H9iLGvZAZiA5Iz1Ci3jfWNMWldbsj7/view?usp=sharing)
+>Workout App helps to create workouts and also track your progress and plus gives information about the weather for those who like to train outside
+
+![image](https://i.postimg.cc/NFt64rnt/Group-12.png)
+
+# DEVELOPMENT
+
+> The app works from IOS 13.0
+> While developing the application I used UIKit and CoreLocation. Also, to get the weather in real time, I use api "Openweathermap" (https://openweathermap.org/)
+> and for data storage I use Realm (https://realm.io/)
