@@ -145,20 +145,16 @@ class EditProfileViewController: UIViewController {
         
         
         //MARK: - SETTINGS KEYBOARD SHOW
-        // Отображение клавиатуры (Появление)
+        // Will show keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
-        // Скрытие клавиатуры (Скрытие)
+        // Hidden keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
         self.view.frame.origin.y = -200
-//        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-//            let keyboardHeight = keyboardFrame.cgRectValue.height
-//            self.view.frame.origin.y = keyboardHeight - (saveButton.frame.origin.y - saveButton.frame.height)
-//        }
     }
     
     @objc private func keyboardWillHide() {
@@ -176,7 +172,7 @@ class EditProfileViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // Загружка в поля существующей модели
+    // Load current model
     private func loadUserInfo() {
         if userArray.count != 0 {
             firstNameTextField.text = userArray[0].userFirstName
@@ -194,7 +190,7 @@ class EditProfileViewController: UIViewController {
     
     private func setUserModel() {
         
-        // Проверяем что получили данные с полей
+        // Check data getting from textFeilds
         guard let firstName = firstNameTextField.text,
               let lastName = lastNameTextField.text,
               let weight = weightTextField.text,
@@ -203,21 +199,21 @@ class EditProfileViewController: UIViewController {
                   return
               }
         
-        // Проверяем что можно конвертировать текст в ИНТ
+        // Check all values convert to Int
         guard let intWeight = Int(weight),
               let intHeight = Int(height),
               let intTarget = Int(target) else {
                   return
               }
         
-        // Сохраняем данные в полученный объект userModel = UserModel() он иницилазирован
+        // save data in object userModel = UserModel()
         userModel.userFirstName = firstName
         userModel.userLastName = lastName
         userModel.userWeight = intWeight
         userModel.userHeight = intHeight
         userModel.userTarget = intTarget
         
-        // Обработка полученного фото
+        // getting photo
         if addPhotoImageView.image == UIImage(named: "photoIcon") {
             userModel.userImage = nil
         } else {

@@ -71,17 +71,17 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
             backgroundImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            backgroundImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
+            backgroundImageView.bottomAnchor.constraint(equalTo: bottomLabel.topAnchor, constant: 0)
         ])
         
         NSLayoutConstraint.activate([
-            topLabel.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+            topLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
             topLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             topLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             bottomLabel.heightAnchor.constraint(equalToConstant: 85)

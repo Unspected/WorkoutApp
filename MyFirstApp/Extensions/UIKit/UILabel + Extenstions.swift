@@ -32,6 +32,7 @@ extension UILabel {
         self.init()
         self.text = font24
         self.font = .robotoMedium24()
+        self.adjustsFontSizeToFitWidth = true
         self.minimumScaleFactor = 0.5
         self.textColor = .specialGray
         self.translatesAutoresizingMaskIntoConstraints = false

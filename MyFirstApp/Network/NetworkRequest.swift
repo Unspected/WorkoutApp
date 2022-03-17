@@ -12,19 +12,9 @@ class NetworkWeatherManager {
     
     private let apiKey = "9b1c307390474827d825e64b349267f1"
 
-    enum requestType {
-        case cityName(city: String)
-        case coordinate(latitude: CLLocationDegrees, longtitude: CLLocationDegrees)
-    }
+    func fetchCurrentWeather(latitude: CLLocationDegrees, longtitude: CLLocationDegrees, complitionHandler: @escaping (CurrentWeather) -> Void) {
 
-    func fetchCurrentWeather(requestType: requestType, complitionHandler: @escaping (CurrentWeather) -> Void) {
-        var urlString = ""
-        switch requestType {
-        case .cityName(let city):
-            urlString = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&apikey=\(apiKey)&units=metric"
-        case .coordinate(let latitude, let longtitude):
-            urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&apikey=\(apiKey)&units=metric"
-        }
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longtitude)&apikey=\(apiKey)&units=metric"
         guard let url = URL(string: urlString) else { return }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { data, response, error in

@@ -53,9 +53,7 @@ class OnboardingViewController: UIViewController {
     }()
     
     private let idOnboardingCell = "idOnboardingCell"
-    
     private var onboardingArray = [OnboardingStruct]()
-    
     private var collectionItem = 0
     
     override func viewDidLoad() {
@@ -98,7 +96,6 @@ class OnboardingViewController: UIViewController {
     }
 
     @objc private func nextButtonTapped() {
-        
         if collectionItem == 1 {
             nextButton.setTitle("START", for: .normal)
         }

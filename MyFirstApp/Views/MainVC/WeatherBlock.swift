@@ -20,7 +20,7 @@ class WeatherBlock: UIView {
         return image
     }()
     
-    // Заголовок
+    // Title
     let weatherTitle: UILabel = {
         let label = UILabel()
         label.font = .robotoMedium18()
@@ -28,7 +28,7 @@ class WeatherBlock: UIView {
         return label
     }()
 
-    // Описание контента под заголовком
+    // Discription below title
     var weatherContent: UILabel = {
         let label = UILabel()
         label.text = "System can't get your location"
@@ -60,8 +60,6 @@ class WeatherBlock: UIView {
         addSubview(weatherContent)
     }
     
-
-    
     private func setConstrains() {
         var const = [NSLayoutConstraint]()
         const.append(sunImg.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10))
@@ -69,7 +67,7 @@ class WeatherBlock: UIView {
         const.append(sunImg.topAnchor.constraint(equalTo: topAnchor, constant: 7))
         const.append(sunImg.widthAnchor.constraint(equalToConstant: 62))
         
-        const.append(weatherTitle.topAnchor.constraint(equalTo: topAnchor, constant: 10))
+        const.append(weatherTitle.topAnchor.constraint(equalTo: topAnchor, constant: 20))
         const.append(weatherTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11))
         
         const.append(weatherTitle.heightAnchor.constraint(equalToConstant: 21))
@@ -77,7 +75,6 @@ class WeatherBlock: UIView {
         const.append(weatherContent.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 11))
         const.append(weatherContent.widthAnchor.constraint(equalToConstant: 171))
         const.append(weatherContent.topAnchor.constraint(equalTo: weatherTitle.bottomAnchor, constant: 5))
-        
         
         NSLayoutConstraint.activate(const)
     }

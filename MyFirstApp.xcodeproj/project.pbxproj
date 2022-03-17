@@ -273,6 +273,8 @@
 		E992D37927924182006791F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E971A2B027D08719005C3301 /* CurrentWeatherData.swift */,
+				E971A2AE27D086EF005C3301 /* CurrentWeather.swift */,
 				E91A8C07279D2E1B0095B818 /* WorkoutModel.swift */,
 				E9599AE327B1A9A3000C31FD /* UserModel.swift */,
 			);
@@ -369,8 +371,6 @@
 			isa = PBXGroup;
 			children = (
 				E9FEC8F727C9E11D007D2D49 /* NetworkRequest.swift */,
-				E971A2AE27D086EF005C3301 /* CurrentWeather.swift */,
-				E971A2B027D08719005C3301 /* CurrentWeatherData.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -641,6 +641,9 @@
 				DEVELOPMENT_TEAM = ZW3N55LCY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyFirstApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkoutApp;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "please share your location for get information about weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -656,7 +659,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -670,6 +673,9 @@
 				DEVELOPMENT_TEAM = ZW3N55LCY7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyFirstApp/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkoutApp;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "please share your location for get information about weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -685,7 +691,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

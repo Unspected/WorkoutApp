@@ -45,6 +45,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 20
         backgroundColor = .specialDarkYellow
         nameLabel.textColor = .white
+        nameLabel.textAlignment = .center
         addSubview(nameLabel)
         addSubview(workoutImageView)
         addSubview(counterLabel)
@@ -63,7 +64,9 @@ class ProfileCollectionViewCell: UICollectionViewCell {
     private func setConstrains() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 27),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 1),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -1),
+            
             
         ])
         
