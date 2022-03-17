@@ -188,7 +188,7 @@ extension TimerWorkoutViewController {
         let endAngle = (-CGFloat.pi / 2)
         let startAngle = 2 * CGFloat.pi + endAngle
         
-        let circularPath = UIBezierPath(arcCenter: center, radius: 114, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+        let circularPath = UIBezierPath(arcCenter: center, radius: 135, startAngle: startAngle, endAngle: endAngle, clockwise: false)
         
         //MARK: - Drow Line for Animation
         // Way animation
@@ -262,10 +262,12 @@ extension TimerWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            ellipseImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 28),
-            ellipseImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ellipseImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
+            ellipseImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ellipseImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            ellipseImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
-        
+
         NSLayoutConstraint.activate([
             timerLabel.leadingAnchor.constraint(equalTo: ellipseImageView.leadingAnchor, constant: 40),
             timerLabel.trailingAnchor.constraint(equalTo: ellipseImageView.trailingAnchor, constant: -40),
@@ -273,21 +275,22 @@ extension TimerWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            detailsLabel.topAnchor.constraint(equalTo: ellipseImageView.bottomAnchor, constant: 26),
-            detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            detailsLabel.topAnchor.constraint(equalTo: ellipseImageView.bottomAnchor, constant: 20),
+            detailsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            detailsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            timerWorkoutParametersView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 0),
-            timerWorkoutParametersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 26),
-            timerWorkoutParametersView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
-            timerWorkoutParametersView.heightAnchor.constraint(equalToConstant: 255)
+            timerWorkoutParametersView.topAnchor.constraint(equalTo: detailsLabel.bottomAnchor, constant: 5),
+            timerWorkoutParametersView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            timerWorkoutParametersView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            timerWorkoutParametersView.heightAnchor.constraint(equalToConstant: 230)
         ])
         
         NSLayoutConstraint.activate([
-            finishButton.topAnchor.constraint(equalTo: timerWorkoutParametersView.bottomAnchor, constant: 13),
-            finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 26),
-            finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
+            finishButton.topAnchor.constraint(equalTo: timerWorkoutParametersView.bottomAnchor, constant: 20),
+            finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             finishButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }

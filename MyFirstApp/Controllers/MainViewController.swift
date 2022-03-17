@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
         label.textColor = .specialGray
         label.font = .robotoMedium24()
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
+        label.minimumScaleFactor = 0.8
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -224,7 +224,7 @@ class MainViewController: UIViewController {
     private func updateInterfaceWeather(weather: CurrentWeather) {
         DispatchQueue.main.async {
             self.weatherBlock.weatherTitle.text = ("\(weather.weatherDescription)  \(weather.temperatureString)℃").capitalized
-            self.weatherBlock.weatherContent.text = "feels like: \(weather.feelsLikeTemperatureString)℃"
+            self.weatherBlock.weatherContent.text = "\(weather.cityName), feels like: \(weather.feelsLikeTemperatureString)℃"
             self.weatherBlock.sunImg.image = UIImage(named: weather.systemIconNameString)
         }
     }
@@ -239,7 +239,7 @@ extension MainViewController: CLLocationManagerDelegate {
         let latitude = location.coordinate.latitude
         let longtitude = location.coordinate.longitude
 
-        networkManager.fetchCurrentWeather(requestType: .coordinate(latitude: latitude, longtitude: longtitude)) { currentWeather in
+        networkManager.fetchCurrentWeather(latitude: latitude, longtitude: longtitude) { currentWeather in
             self.updateInterfaceWeather(weather: currentWeather)
         }
     }

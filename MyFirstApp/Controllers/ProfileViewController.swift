@@ -45,8 +45,7 @@ class ProfileViewController: UIViewController {
         label.font = .robotoMedium24()
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.5
-        label.numberOfLines = 2
+        label.minimumScaleFactor = 0.8
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -233,7 +232,6 @@ extension ProfileViewController: UICollectionViewDataSource {
         cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialGreen : .specialDarkYellow)
         return cell
     }
-    
 }
 
 // MARK: - Settings CELL, Size and Spacing
@@ -277,10 +275,10 @@ extension ProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            userNameLabel.centerXAnchor.constraint(equalTo: userPhotoView.centerXAnchor),
+            userNameLabel.leadingAnchor.constraint(equalTo: userPhotoView.leadingAnchor, constant: 15),
             userNameLabel.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 19),
             userNameLabel.bottomAnchor.constraint(equalTo: userPhotoView.bottomAnchor, constant: -15),
-            userNameLabel.trailingAnchor.constraint(equalTo: userPhotoView.trailingAnchor, constant: -1)
+            userNameLabel.trailingAnchor.constraint(equalTo: userPhotoView.trailingAnchor, constant: -15)
         ])
         
         NSLayoutConstraint.activate([

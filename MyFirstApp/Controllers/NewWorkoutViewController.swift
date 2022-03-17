@@ -12,6 +12,14 @@ import RealmSwift
 
 class NewWorkoutViewController: UIViewController {
     
+    private let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.isScrollEnabled = true
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    
     // Кнопка крестик для закрытия окна
     private let closeButton : UIButton = {
         let button = UIButton(type: .system)
@@ -80,6 +88,7 @@ class NewWorkoutViewController: UIViewController {
         return button
     }()
     
+    
     //MARK: - Action "SAVE" Button
     @objc private func saveButtonTapped() {
         setModel()
@@ -97,6 +106,11 @@ class NewWorkoutViewController: UIViewController {
     private var imageTest = UIImage(named: "heavyItem")
     
     private let collectionViewIDCell = "collectionViewIDCell"
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,16 +125,17 @@ class NewWorkoutViewController: UIViewController {
     // MARK: All have to locate here
     private func setUpViews() {
         view.backgroundColor = .specialBackground
-        view.addSubview(closeButton)
-        view.addSubview(newWorkoutLabel)
-        view.addSubview(nameTextField)
-        view.addSubview(nameLabel)
-        view.addSubview(labelDateAndRepeat)
-        view.addSubview(dateAndRepeatView)
-        view.addSubview(repsOrTimerLabel)
-        view.addSubview(repsOrTimerView)
-        view.addSubview(collectionView)
-        view.addSubview(saveButton)
+        view.addSubview(scrollView)
+        scrollView.addSubview(closeButton)
+        scrollView.addSubview(newWorkoutLabel)
+        scrollView.addSubview(nameTextField)
+        scrollView.addSubview(nameLabel)
+        scrollView.addSubview(labelDateAndRepeat)
+        scrollView.addSubview(dateAndRepeatView)
+        scrollView.addSubview(repsOrTimerLabel)
+        scrollView.addSubview(repsOrTimerView)
+        scrollView.addSubview(collectionView)
+        scrollView.addSubview(saveButton)
         collectionView.register(NewWorkoutCell.self, forCellWithReuseIdentifier: collectionViewIDCell)
 
     }
@@ -252,7 +267,6 @@ extension NewWorkoutViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         5
     }
-    
 }
 
 extension NewWorkoutViewController: UITextFieldDelegate {
@@ -270,69 +284,59 @@ extension NewWorkoutViewController {
     private func setConstrains() {
         
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            
+            closeButton.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 40),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: 20),
             closeButton.widthAnchor.constraint(equalToConstant: 30),
-            closeButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        NSLayoutConstraint.activate([
+            closeButton.heightAnchor.constraint(equalToConstant: 30),
+  
             newWorkoutLabel.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -57),
-            newWorkoutLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            newWorkoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
-            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
+            newWorkoutLabel.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 40),
+            newWorkoutLabel.centerXAnchor.constraint(equalTo: scrollView.contentLayoutGuide.centerXAnchor),
+
+            nameTextField.topAnchor.constraint(equalTo: newWorkoutLabel.bottomAnchor, constant: 28),
+            nameTextField.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 21),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: nameTextField.trailingAnchor, constant: 21),
             nameTextField.heightAnchor.constraint(equalToConstant: 38),
-            nameTextField.topAnchor.constraint(equalTo: newWorkoutLabel.bottomAnchor, constant: 28)
-        ])
-        
-        NSLayoutConstraint.activate([
+     
             nameLabel.bottomAnchor.constraint(equalTo: nameTextField.topAnchor, constant: -2),
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
-            nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            nameLabel.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 31),
+            scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 20),
+       
             labelDateAndRepeat.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 14),
-            labelDateAndRepeat.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
-            labelDateAndRepeat.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            labelDateAndRepeat.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 31),
+            labelDateAndRepeat.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -20),
+    
             dateAndRepeatView.topAnchor.constraint(equalTo: labelDateAndRepeat.bottomAnchor, constant: 3),
-            dateAndRepeatView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
-            dateAndRepeatView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
-            dateAndRepeatView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.22)
-        ])
-        
-        NSLayoutConstraint.activate([
+            dateAndRepeatView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 21),
+            dateAndRepeatView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -21),
+            dateAndRepeatView.heightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.widthAnchor, multiplier: 0.22),
+       
             repsOrTimerLabel.topAnchor.constraint(equalTo: dateAndRepeatView.bottomAnchor, constant: 20),
-            repsOrTimerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 31),
-            repsOrTimerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-        ])
-        
-        NSLayoutConstraint.activate([
+            repsOrTimerLabel.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 31),
+            repsOrTimerLabel.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -20),
+       
             repsOrTimerView.topAnchor.constraint(equalTo: repsOrTimerLabel.bottomAnchor, constant: 3),
-            repsOrTimerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
-            repsOrTimerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
-            repsOrTimerView.heightAnchor.constraint(equalToConstant: 320)
-        ])
-        
-        NSLayoutConstraint.activate([
+            repsOrTimerView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 21),
+            repsOrTimerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -21),
+            repsOrTimerView.heightAnchor.constraint(equalToConstant: 320),
+       
             collectionView.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 10),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
-            collectionView.heightAnchor.constraint(equalToConstant: 72)
-        ])
-        
-        NSLayoutConstraint.activate([
-            saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 21),
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
+            collectionView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 21),
+            collectionView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -21),
+            collectionView.heightAnchor.constraint(equalToConstant: 72),
+       
+            saveButton.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor, constant: 21),
+            saveButton.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor, constant: -21),
+            saveButton.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
             saveButton.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 25),
-            saveButton.heightAnchor.constraint(equalToConstant: 55)
+            saveButton.heightAnchor.constraint(equalToConstant: 55),
+            
+            scrollView.contentLayoutGuide.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor)
         ])
         
     }
